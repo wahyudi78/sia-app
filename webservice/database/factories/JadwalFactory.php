@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Nilai>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Jadwal>
  */
-class NilaiFactory extends Factory
+class JadwalFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,11 +17,13 @@ class NilaiFactory extends Factory
     public function definition(): array
     {
         return [
-            'nilai'   => rand(50,100),
-            'user_id'   => 2,
-            'mapel_id'   => rand(1,2),
+            'mapel_id' => rand(1,2),
+            'hari' => fake()->name(),
+            'mulai' => fake()->time(),
+            'selesai' => fake()->time(),
+            'kelas' => 1,
             'ruangan_id'   => rand(1,2),
-            'waktu'    => fake()->datetime()
+            
         ];
     }
 }

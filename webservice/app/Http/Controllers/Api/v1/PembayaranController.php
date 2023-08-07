@@ -40,8 +40,8 @@ class PembayaranController extends Controller
      */
     public function show(Pembayaran $pembayaran)
     {
-        $this->authorize('view', $pembayaran);
-        PembayaranResource::make($pembayaran);
+        
+        return PembayaranResource::make($pembayaran);
     }
 
     /**

@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nilais', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            
+        Schema::create('jadwals', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->foreignId('mapel_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->string('hari');
+            $table->time('mulai');
+            $table->time('selesai');
             $table->foreignId('ruangan_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->integer('kelas');
+            $table->timestamps();
         });
     }
 
@@ -24,14 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('nilais', function (Blueprint $table) {
-
-             $table->dropForeign(['user_id']);
-             $table->dropColumn(['user_id']);
-             $table->dropForeign(['mapel_id']);
-             $table->dropColumn(['mapel_id']);
-             $table->dropForeign(['ruangan_id']);
-             $table->dropColumn(['ruangan_id']);
-        });
+        $table->dropForeign(['mapel_id']);
+        $table->dropColumn(['mapel_id']);
+        $table->dropForeign(['ruangan_id']);
+        $table->dropColumn(['ruangan_id']);
+        Schema::dropIfExists('jadwals');
     }
 };

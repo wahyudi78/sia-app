@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePembayaranRequest extends FormRequest
+class StoreJadwalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,12 @@ class StorePembayaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode'   => 'required|unique:pembayarans',
-            'nominal'   => 'required',
-            'user_id'  => 'required',
-            'waktu'    => 'required',
-            'status'    => 'required',
+            'mapel_id'  => 'required ',
+            'hari'  => 'required',
+            'mulai'  => 'required',
+            'selesai'  => 'required',
+            'kelas'  => 'required',
+            'ruangan_id'  => 'required',
         ];
     }
 }

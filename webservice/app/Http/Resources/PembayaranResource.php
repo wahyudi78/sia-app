@@ -18,7 +18,7 @@ class PembayaranResource extends JsonResource
             'id' => $this->id ,
             'kode' => $this->kode ,
             'nominal' => $this->nominal ,
-            'siswa' => new SiswaResource($this->siswa),
+            'siswa' => new UserResource($this->user),
             'waktu' => $this->waktu,
             'status' => $this->status
           ];

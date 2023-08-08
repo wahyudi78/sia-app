@@ -9,7 +9,7 @@
 # Config Laravel - Werbservice
 1. clone project
 2. buka folder webservice
-3. cari file .env
+3. cari file .env (jika tidak ada silahkan duplicate .env.example -> ubah menjadi .env)
 4. setting database
 6. buka terminal/cmd
 7. ketik "php artisan-migrate --seed"

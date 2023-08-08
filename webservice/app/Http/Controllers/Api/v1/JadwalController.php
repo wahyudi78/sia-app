@@ -27,7 +27,12 @@ class JadwalController extends Controller
     public function store(StoreJadwalRequest $request)
     {
         $q = Jadwal::create($request->validated());
-        return JadwalResource::make($q);
+        $data =  JadwalResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,12 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        return JadwalResource::make($jadwal);
+        $data =  JadwalResource::make($jadwal);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
         
     }
 
@@ -46,7 +56,12 @@ class JadwalController extends Controller
     public function update(UpdateJadwalRequest $request, Jadwal $jadwal)
     {
         $jadwal->update($request->validated());
-        return JadwalResource::make($jadwal);
+        $data = JadwalResource::make($jadwal);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil diupdate",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -55,6 +70,9 @@ class JadwalController extends Controller
     public function destroy(Jadwal $jadwal)
     {
         $jadwal->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil dihapus"
+        ]);
     }
 }

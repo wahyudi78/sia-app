@@ -2,26 +2,52 @@
   <div class="container my-5">
     <div class="row justify-content-center">
       <div class="col align-content-center">
-        <router-link :to="{ name: 'index.nilai' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Back </router-link>
-        <div class="card rounded shadow text-center">
+        <router-link :to="{ name: 'index.nilai' }" class="btn btn-outline-warning btn-lg rounded shadow mb-3"> Back </router-link>
+        <div class="card rounded shadow">
           <div class="card-body">
             <!-- <form action=""> -->
             <form @submit.prevent="store">
-              <div class="form-floating">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                  <option selected>Pilh Siswa</option>
-                  <option v-for="(siswaData, index) in siswaData" :key="index" :value="siswaData.id">{{ siswaData.nama }}</option>
+              <!-- Siswa -->
+              <div class="form-group mb-3">
+                <label for="label">Pilih Siswa</label>
+
+                <select class="form-select mb-2 mt-2" aria-label="Default select example" v-model="selectedSiswa">
+                  <!-- <option value="">Pilih</option> -->
+                  <option v-for="(optionSiswa, index) in optionSiswa.data" :key="index" :value="optionSiswa.id">{{ optionSiswa.name }}</option>
                 </select>
-                <label for="floatingSelect">Works with selects</label>
               </div>
-              <div class="form-floating">
-                <input v-model="data.ruangan" type="text" class="form-control" id="floatingRuangan" placeholder="ruangan" />
-                <label for="floatingRuangan">Ruangan</label>
-                <div v-if="validation.mapel" class="text-danger">
-                  {{ validation.errors["ruangan"] }}
-                </div>
+
+              <!-- Mapel -->
+              <div class="form-group mb-3">
+                <label for="exampleFormControlSelect2">Pilih Mapel</label>
+                <select class="form-select mb-2 mt-2" aria-label="Default select example" v-model="selectedMapel">
+                  <!-- <option value="">Pilih</option> -->
+                  <option v-for="(optionMapel, index) in optionMapel.data" :key="index" :value="optionMapel.id">{{ optionMapel.mapel }}</option>
+                </select>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+
+              <!-- Ruangan -->
+              <div class="form-group mb-3">
+                <label for="exampleFormControlSelect2">Pilih Ruangan</label>
+                <select class="form-select mb-2 mt-2" aria-label="Default select example" v-model="selectedRuangan">
+                  <!-- <option value="">Pilih</option> -->
+                  <option v-for="(optionRuangan, index) in optionRuangan.data" :key="index" :value="optionRuangan.id">{{ optionRuangan.ruangan }}</option>
+                </select>
+              </div>
+
+              <!-- Nilai -->
+              <div class="mb-3">
+                <label for="Nilai" class="form-label">Nilai</label>
+                <input v-model="data.nilai" type="number" class="form-control" id="nilai" />
+              </div>
+
+              <!-- Waktu -->
+              <div class="mb-3">
+                <label for="waktu" class="form-label">Waktu</label>
+                <input v-model="data.waktu" type="date" class="form-control" id="waktu" />
+              </div>
+
+              <button type="submit" class="btn btn-lg btn-outline-success">Submit</button>
             </form>
             <!-- </form> -->
           </div>
@@ -40,84 +66,96 @@ export default {
   setup() {
     const data = reactive({
       nilai: "",
-      siswa: "",
-      guru: "",
-      mapel: "",
-      ruang: "",
+      user_id: "",
+      mapel_id: "",
+      ruangan_id: "",
       waktu: "",
     });
-    const siswa = reactive({
-      nilai: "",
-      siswa: "",
-      guru: "",
-      mapel: "",
-      ruang: "",
-      waktu: "",
-    });
-    let siswaData = ref([]);
+
+    const optionSiswa = ref([]);
+    const optionMapel = ref([]);
+    const optionRuangan = ref([]);
+    const selectedSiswa = "";
+    const selectedMapel = "";
+    const selectedRuangan = "";
+
+    const today = new Date();
+    const now = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
 
     const validation = ref([]);
 
     const router = useRouter();
 
-    const token = JSON.parse( localStorage.getItem('token') );
-    let url = JSON.parse( localStorage.getItem('url') );
+    const token = JSON.parse(localStorage.getItem("token"));
+    let url = JSON.parse(localStorage.getItem("url"));
 
     function store() {
+      data.mapel_id = this.selectedMapel;
+      data.ruangan_id = this.selectedRuangan;
+      data.user_id = this.selectedSiswa;
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       axios
         // .request(config)
-        .post(url+"v1/nilai", data)
+        .post(url + "v1/nilai", data)
         .then(() => {
-          // console.log(JSON.stringify(response));
-          // alert(JSON.stringify(response));
-          // // validation.value = response;
-          // router.push({
-          //   name: "index.mapel",
-          // });
           router.push({ name: "index.nilai" });
         })
         .catch((err) => {
-          // console.log(err.message);
-          // alert(JSON.stringify(err.message));
-          // validation.value = err.errors;
+          console.log("error :" + err);
         });
+    }
+
+    function option(path) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      axios
+        .get(url + path)
+        .then((result) => {
+          if (path === "v1/users") {
+            optionSiswa.value = result.data;
+          }
+          if (path === "v1/mapel") {
+            optionMapel.value = result.data;
+          }
+          if (path === "v1/ruangan") {
+            optionRuangan.value = result.data;
+          }
+
+          // alert(siswaData);
+        })
+        .catch((err) => {
+          // console.log(err.response.statusText);
+          console.log(err);
+        });
+    }
+
+    function cekdata() {
+      data.mapel_id = this.selectedMapel;
+      data.ruang_id = this.selectedRuangan;
+      data.user_id = this.selectedSiswa;
+      // data.waktu = this;
+      console.log(data);
     }
 
     onMounted(() => {
-      const token = "13|KjKB1yeD5xm7ecp2Ri4akORPl3RNtJuYBXS8FLiD";
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      axios
-        .get(url+"v1/siswa/")
-        .then((result) => {
-          siswaData.value = result.data;
-          // alert(siswaData);
-        })
-        .catch((err) => {
-          console.log(err.response.statusText);
-        });
+      option("v1/users");
+      option("v1/mapel");
+      option("v1/ruangan");
     });
-
-    function getSiswa() {
-      const token = "13|KjKB1yeD5xm7ecp2Ri4akORPl3RNtJuYBXS8FLiD";
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      axios
-        .get("http://127.0.0.1:8000/api/v1/siswa/")
-        .then((result) => {
-          siswaData.value = result.data;
-          // alert(siswaData);
-        })
-        .catch((err) => {
-          console.log(err.response.statusText);
-        });
-    }
 
     return {
       data,
       validation,
       router,
       store,
-      getSiswa,
+      optionSiswa,
+      optionMapel,
+      optionRuangan,
+      selectedSiswa,
+      selectedMapel,
+      selectedRuangan,
+      option,
+      cekdata,
+      now,
     };
   },
 };

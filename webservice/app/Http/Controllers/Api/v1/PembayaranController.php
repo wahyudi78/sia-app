@@ -15,7 +15,12 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        return PembayaranResource::collection(Pembayaran::all());
+        $data = PembayaranResource::collection(Pembayaran::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -32,7 +37,12 @@ class PembayaranController extends Controller
     public function store(StorePembayaranRequest $request)
     {
         $q = Pembayaran::create($request->validated());
-        return PembayaranResource::make($q);
+        $data = PembayaranResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -41,7 +51,12 @@ class PembayaranController extends Controller
     public function show(Pembayaran $pembayaran)
     {
         
-        return PembayaranResource::make($pembayaran);
+        $data = PembayaranResource::make($pembayaran);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -58,7 +73,12 @@ class PembayaranController extends Controller
     public function update(UpdatePembayaranRequest $request, Pembayaran $pembayaran)
     {
         $pembayaran->update($request->validated());
-        return PembayaranResource::make($pembayaran);
+        $data = PembayaranResource::make($pembayaran);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -67,6 +87,9 @@ class PembayaranController extends Controller
     public function destroy(Pembayaran $pembayaran)
     {
         $pembayaran->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+        ]);
     }
 }

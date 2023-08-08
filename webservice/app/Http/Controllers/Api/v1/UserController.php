@@ -16,7 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::all());
+        $data = UserResource::collection(User::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -25,7 +30,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $q = User::create($request->validated());
-        return UserResource::make($q);
+        $data = UserResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -44,7 +54,12 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated());
-        return UserResource::make($user);
+        $data = UserResource::make($user);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -52,6 +67,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil"
+        ]);
     }
 }

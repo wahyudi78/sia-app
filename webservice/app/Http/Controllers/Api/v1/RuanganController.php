@@ -15,7 +15,12 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        return RuanganResource::collection(Ruangan::all());
+        $data = RuanganResource::collection(Ruangan::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -32,7 +37,12 @@ class RuanganController extends Controller
     public function store(StoreRuanganRequest $request)
     {
         $q = Ruangan::create($request->validated());
-        return RuanganResource::make($q);
+        $data = RuanganResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -40,7 +50,12 @@ class RuanganController extends Controller
      */
     public function show(Ruangan $ruangan)
     {
-        return RuanganResource::make($ruangan);
+        $data = RuanganResource::make($ruangan);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -57,7 +72,12 @@ class RuanganController extends Controller
     public function update(UpdateRuanganRequest $request, Ruangan $ruangan)
     {
         $ruangan->update($request->validated());
-        return RuanganResource::make($ruangan);
+        $data = RuanganResource::make($ruangan);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -66,6 +86,9 @@ class RuanganController extends Controller
     public function destroy(Ruangan $ruangan)
     {
         $ruangan->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil"
+        ]);
     }
 }

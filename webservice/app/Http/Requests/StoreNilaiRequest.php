@@ -26,7 +26,7 @@ class StoreNilaiRequest extends FormRequest
             'user_id' => 'required',
             'mapel_id' => 'required',
             
-            'ruang_id' => 'required',
+            'ruangan_id' => 'required',
             'waktu' => 'required',
         ];
     }

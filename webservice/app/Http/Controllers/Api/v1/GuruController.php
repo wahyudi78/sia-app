@@ -17,7 +17,12 @@ class GuruController extends Controller
      */
     public function index()
     {
-        return GuruResource::collection(Guru::all());
+        $data = GuruResource::collection(Guru::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -34,7 +39,12 @@ class GuruController extends Controller
     public function store(StoreGuruRequest $request)
     {
         $q = Guru::create($request->validated());
-        return GuruResource::make($q);
+        $data =  GuruResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -42,7 +52,12 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        return GuruResource::make($guru);
+        $data = GuruResource::make($guru);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -59,7 +74,12 @@ class GuruController extends Controller
     public function update(UpdateGuruRequest $request, Guru $guru)
     {
         $guru->update($request->validated());
-        return GuruResource::make($guru);
+        $data = GuruResource::make($guru);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil diupate",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -68,6 +88,9 @@ class GuruController extends Controller
     public function destroy(Guru $guru)
     {
         $guru->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil dihapus"
+        ]);
     }
 }

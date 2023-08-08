@@ -32,7 +32,12 @@ class NilaiController extends Controller
     public function store(StoreNilaiRequest $request)
     {
         $q = Nilai::create($request->validated());
-        return NilaiResource::make($q);
+        $data =  NilaiResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -40,7 +45,12 @@ class NilaiController extends Controller
      */
     public function show(Nilai $nilai)
     {
-       return NilaiResource::make($nilai);
+       $data = NilaiResource::make($nilai);
+       return response()->json([
+        'Status' => 200,
+        'message' => "Berhasil",
+        'data'  => $data,
+    ]);
     }
 
     /**
@@ -57,7 +67,12 @@ class NilaiController extends Controller
     public function update(UpdateNilaiRequest $request, Nilai $nilai)
     {
         $nilai->update($request->validated());
-        return NilaiResource::make($nilai);
+        $data = NilaiResource::make($nilai);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil diupdate",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -66,6 +81,9 @@ class NilaiController extends Controller
     public function destroy(Nilai $nilai)
     {
         $nilai->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil dihapus"
+        ]);
     }
 }

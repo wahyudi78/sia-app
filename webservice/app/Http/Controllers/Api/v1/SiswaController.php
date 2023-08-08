@@ -18,7 +18,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return SiswaResource::collection(Siswa::all());
+        $data = SiswaResource::collection(Siswa::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil"
+        ]);
     }
 
     /**
@@ -35,7 +39,12 @@ class SiswaController extends Controller
     public function store(StoreSiswaRequest $request)
     {
         $q = Siswa::create($request->validated());
-        return SiswaResource::make($q);
+        $data = SiswaResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -43,7 +52,12 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        return SiswaResource::make($siswa);
+        $data = SiswaResource::make($siswa);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -60,7 +74,12 @@ class SiswaController extends Controller
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
         $siswa->update($request->validated());
-        return SiswaResource::make($siswa);
+        $data = SiswaResource::make($siswa);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -69,6 +88,9 @@ class SiswaController extends Controller
     public function destroy(Siswa $siswa)
     {
         $siswa->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil"
+        ]);
     }
 }

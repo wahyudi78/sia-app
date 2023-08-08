@@ -15,7 +15,12 @@ class MapelController extends Controller
      */
     public function index()
     {
-        return MapelResource::collection(Mapel::all());
+        $data = MapelResource::collection(Mapel::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -32,7 +37,12 @@ class MapelController extends Controller
     public function store(StoreMapelRequest $request)
     {
         $q = Mapel::create($request->validated());
-        return MapelResource::make($q);
+        $data =  MapelResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -40,7 +50,12 @@ class MapelController extends Controller
      */
     public function show(Mapel $mapel)
     {
-        return MapelResource::make($mapel);
+        $data = MapelResource::make($mapel);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -57,7 +72,12 @@ class MapelController extends Controller
     public function update(UpdateMapelRequest $request, Mapel $mapel)
     {
         $mapel->update($request->validated());
-        return MapelResource::make($mapel);
+        $data = MapelResource::make($mapel);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil diupdate",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -66,6 +86,9 @@ class MapelController extends Controller
     public function destroy(Mapel $mapel)
     {
         $mapel->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil dihapus",
+        ]);
     }
 }

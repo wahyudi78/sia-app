@@ -20,7 +20,13 @@ class AbsensiController extends Controller
         // $this->authorize('viewAny');
 
         $absen = Absensi::with('guru')->get();
-        return AbsensiResource::collection($absen);
+        $data = AbsensiResource::collection($absen);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
+        
     }
 
     /**
@@ -37,7 +43,12 @@ class AbsensiController extends Controller
     public function store(StoreAbsensiRequest $request)
     {
         $q = Absensi::create($request->validated());
-        return AbsensiResource::make($q);
+        $data = AbsensiResource::make($q);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -45,7 +56,13 @@ class AbsensiController extends Controller
      */
     public function show(Absensi $absensi)
     {
-        return AbsensiResource::make($absensi);
+        $data = AbsensiResource::make($absensi);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
+        
     }
 
     /**
@@ -62,7 +79,12 @@ class AbsensiController extends Controller
     public function update(UpdateAbsensiRequest $request, Absensi $absensi)
     {
         $absensi->update($request->validated());
-        return AbsensiResource::make($absensi);
+        $data = AbsensiResource::make($absensi);
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil di update",
+            'data'  => $data,
+        ]);
     }
 
     /**
@@ -71,6 +93,9 @@ class AbsensiController extends Controller
     public function destroy(Absensi $absensi)
     {
         $absensi->delete();
-        return response()->noContent();
+        return response()->json([
+            'Status' => 200,
+            'message' => "Data Berhasil dihapus"
+        ]);
     }
 }

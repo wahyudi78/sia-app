@@ -17,7 +17,7 @@
                 <label for="floatingMapel">password</label>
               </div> -->
               <div class="form-group p-2">
-                <label for="username" class="mb-3">Email address</label>
+                <label for="username" class="mb-3">Username</label>
                 <input type="text" v-model="data.username" class="form-control mb-3" id="username" placeholder="Masukan Username" />
               </div>
               <div class="form-group p-2">

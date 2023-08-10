@@ -29,16 +29,16 @@ onMounted(async () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>KODE</th>
                 <th>RUANGAN</th>
+                <th>KELAS</th>
                 <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(ruangan, index) in ruangan" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td>{{ ruangan.kode }}</td>
                 <td>{{ ruangan.ruangan }}</td>
+                <td>{{ ruangan.kelas }}</td>
                 <td>
                   <div class="btn-group">
                     <button class="btn btn-sm btn-outline-info">Edit</button>

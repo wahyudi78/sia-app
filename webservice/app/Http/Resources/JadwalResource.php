@@ -16,6 +16,7 @@ class JadwalResource extends JsonResource
     {
        return[
         'id' => $this->id ,
+        'guru' => new UserResource($this->user) ,
         'mapel' => $this->mapel ,
         'hari' => $this->hari ,
         'mulai' => $this->mulai,

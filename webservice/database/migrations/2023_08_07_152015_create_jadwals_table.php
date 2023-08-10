@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
             $table->foreignId('mapel_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
             $table->string('hari');
             $table->time('mulai');
@@ -30,6 +31,8 @@ return new class extends Migration
     {
         $table->dropForeign(['mapel_id']);
         $table->dropColumn(['mapel_id']);
+        $table->dropForeign(['user_id']);
+        $table->dropColumn(['user_id']);
         $table->dropForeign(['ruangan_id']);
         $table->dropColumn(['ruangan_id']);
         Schema::dropIfExists('jadwals');

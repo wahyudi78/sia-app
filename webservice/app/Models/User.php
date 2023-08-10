@@ -50,5 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Nilai::class);
     }
+    public function jadwal()
+    {
+        return $this->hasMany(Nilai::class);
+    }
     
 }

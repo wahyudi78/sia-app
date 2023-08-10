@@ -37,7 +37,6 @@ class LoginController extends Controller
 
         return response()->json([
             'user'  => $user,
-            'detail' => $detail,
             'token' => $user->createToken('laravel_api_token')->plainTextToken
         ]);
     }

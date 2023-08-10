@@ -17,6 +17,7 @@ class JadwalFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => 2,
             'mapel_id' => rand(1,2),
             'hari' => fake()->name(),
             'mulai' => fake()->time(),

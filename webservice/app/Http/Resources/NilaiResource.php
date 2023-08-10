@@ -2,7 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\GuruResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\MapelResource;
+use App\Http\Resources\RuanganResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class NilaiResource extends JsonResource
@@ -20,6 +25,8 @@ class NilaiResource extends JsonResource
             'waktu' => $this->waktu,
             // 'guru' => new GuruResource($this->gurus),
             'siswa' => new UserResource($this->user),
+            'guru' => User::where('id', $this->guru_id)->first(),
+            // 'guru' => $this->guru_id,
             
             'ruang' => new RuanganResource($this->ruangan), 
             'mapel' => new MapelResource($this->mapel)

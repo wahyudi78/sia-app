@@ -31,6 +31,7 @@ onMounted(async () => {
               <tr>
                 <th>No</th>
                 <th>SISWA</th>
+                <th>GURU</th>
                 <th>MATA PELAJARAN</th>
                 <th>RUANGAN</th>
                 <th>NILAI</th>
@@ -42,6 +43,7 @@ onMounted(async () => {
               <tr v-for="(nilai, index) in nilai" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ nilai.siswa.name }}</td>
+                <td>{{ nilai.guru.name }}</td>
                 <td>{{ nilai.mapel.mapel }}</td>
                 <td>{{ nilai.ruang.ruangan }}</td>
                 <td :class="nilai.nilai < 75 ? 'text-danger' : nilai.nilai > 80 ? 'text-success' : 'text-primary'">{{ nilai.nilai }}</td>

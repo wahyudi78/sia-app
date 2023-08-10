@@ -16,7 +16,7 @@ class RuanganResource extends JsonResource
     {
         return [
             'id' => $this->id ,
-            'kode' => $this->kode ,
+            'kelas' => $this->kelas ,
             'ruangan' => $this->ruangan ,
             
           ];

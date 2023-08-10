@@ -22,6 +22,7 @@ class StoreJadwalRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id'  => 'required ',
             'mapel_id'  => 'required ',
             'hari'  => 'required',
             'mulai'  => 'required',

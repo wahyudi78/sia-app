@@ -29,15 +29,15 @@ onMounted(async () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>KODE</th>
                 <th>MAPEL</th>
+                <th>KELAS</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(mapel, index) in mapel" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td>{{ mapel.kode }}</td>
                 <td>{{ mapel.mapel }}</td>
+                <td>{{ mapel.kelas }}</td>
                 <td>
                   <div class="btn-group">
                     <button class="btn btn-sm btn-outline-info">Edit</button>

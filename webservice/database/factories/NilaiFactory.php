@@ -18,7 +18,8 @@ class NilaiFactory extends Factory
     {
         return [
             'nilai'   => rand(50,100),
-            'user_id'   => 2,
+            'user_id'   => 3,
+            'guru_id'   => 2,
             'mapel_id'   => rand(1,2),
             'ruangan_id'   => rand(1,2),
             'waktu'    => fake()->datetime()

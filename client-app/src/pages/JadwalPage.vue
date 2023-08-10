@@ -30,6 +30,8 @@ onMounted(async () => {
             <thead>
               <tr>
                 <th>No</th>
+                <th>GURU</th>
+
                 <th>MATA PELAJARAN</th>
                 <th>RUANGAN</th>
                 <th>KELAS</th>
@@ -41,6 +43,7 @@ onMounted(async () => {
             <tbody>
               <tr v-for="(jadwal, index) in jadwal" :key="index">
                 <td>{{ index + 1 }}</td>
+                <td>{{ jadwal.guru.name }}</td>
                 <td>{{ jadwal.mapel.mapel }}</td>
                 <td>{{ jadwal.ruangan.ruangan }}</td>
                 <td>{{ jadwal.kelas }}</td>

@@ -17,7 +17,7 @@ class MapelFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode'   => rand(1,100),
+            'kelas'   => rand(1,100),
             'mapel'  => fake()->sentence()
         ];
     }

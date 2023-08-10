@@ -4,6 +4,8 @@
 # REQUIREMENT
 1. apache webserver app (XAMPP/MAMPP...)
 2. kode editor (VsCode/Sublime/..)
+3. NODE JS v18
+4. php V8.2
 
 
 # Config Laravel - Werbservice

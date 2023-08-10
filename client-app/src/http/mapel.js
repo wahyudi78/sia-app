@@ -8,4 +8,4 @@ export const createMapel = (mapel) => api.post(resource, mapel);
 
 export const updateMapel = (id, mapel) => api.put(resource + mapel, mapel);
 
-export const deleteMapel = (id) => api.delete(resource + id);
+export const deleteMapel = (id) => api.delete(resource + "/" + id);

@@ -1,20 +1,31 @@
 <script setup>
-import DataTable from "datatables.net-vue3";
-import DataTablesLib from "datatables.net";
 import { computed, ref, onMounted } from "vue";
-import { allMapel } from "../http/mapel";
-import Navbar from "../components/Navbar.vue";
-
-DataTable.use(DataTablesLib);
+import { allMapel, deleteMapel } from "../../http/mapel";
+import Navbar from "../../components/Navbar.vue";
+// import ModalMapel from "../components/mapel/modalMapel.vue";
 
 const mapel = ref([]);
+
+function destroy(id, index) {
+  deleteMapel(id)
+    .then((response) => {
+      console.log(response);
+      mapel.value.splice(index, 1);
+    })
+    .catch(function (error) {
+      if (error.response) {
+      } else if (error.request) {
+      } else {
+        console.log("Error", error.message);
+      }
+      console.log("error" + error.config);
+    });
+}
 
 onMounted(async () => {
   const { data } = await allMapel();
   mapel.value = data.data;
-  return {
-    mapel,
-  };
+  destroy;
 });
 </script>
 
@@ -22,9 +33,17 @@ onMounted(async () => {
   <Navbar />
   <div class="conatiner m-3">
     <div class="card p-3">
-      <table class="table table-striped p-5">
+      <!-- Button trigger modal -->
+      <h1>Data Mata Pelajaran</h1>
+      <div class="row m-4">
+        <div class="col-lg-5">
+          <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+        </div>
+      </div>
+
+      <table class="table table-hover p-5">
         <!-- <DataTable :data="isGuru" class="display"> -->
-        <div class="table table-hover">
+        <div class="table">
           <table class="table">
             <thead>
               <tr>
@@ -41,7 +60,7 @@ onMounted(async () => {
                 <td>
                   <div class="btn-group">
                     <button class="btn btn-sm btn-outline-info">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(mapel.id, index)">Delete</button>
                   </div>
                 </td>
               </tr>

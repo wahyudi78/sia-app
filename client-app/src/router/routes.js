@@ -1,6 +1,7 @@
 import LoginPage from "../pages/LoginPage.vue";
 import Homepage from "../pages/Homepage.vue";
-import MapelPage from "../pages/MapelPage.vue";
+import MapelPage from "../pages/mapel/MapelPage.vue";
+import CreateMapel from "../pages/mapel/CreateMapel.vue";
 import RuanganPage from "../pages/RuanganPage.vue";
 import NilaiPage from "../pages/NilaiPage.vue";
 import AbsensiPage from "../pages/AbsensiPage.vue";
@@ -20,11 +21,22 @@ const routes = [
     component: Homepage,
     name: "home",
   },
+
+  //** Mata Pelajaran */
+
   {
     path: "/mapel",
     component: MapelPage,
     name: "mapel",
   },
+  {
+    path: "/create-mapel",
+    component: CreateMapel,
+    name: "create.mapel",
+  },
+
+  //** Raungan */
+
   {
     path: "/ruangan",
     component: RuanganPage,

@@ -2,7 +2,10 @@ import LoginPage from "../pages/LoginPage.vue";
 import Homepage from "../pages/Homepage.vue";
 import MapelPage from "../pages/mapel/MapelPage.vue";
 import CreateMapel from "../pages/mapel/CreateMapel.vue";
-import RuanganPage from "../pages/RuanganPage.vue";
+import UpdateMapel from "../pages/mapel/UpdateMapel.vue";
+import RuanganPage from "../pages/ruangan/RuanganPage.vue";
+import CreateRuangan from "../pages/ruangan/CreateRuangan.vue";
+import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
 import NilaiPage from "../pages/NilaiPage.vue";
 import AbsensiPage from "../pages/AbsensiPage.vue";
 import JadwalPage from "../pages/JadwalPage.vue";
@@ -34,6 +37,11 @@ const routes = [
     component: CreateMapel,
     name: "create.mapel",
   },
+  {
+    path: "/update-mapel/:id",
+    component: UpdateMapel,
+    name: "update.mapel",
+  },
 
   //** Raungan */
 
@@ -42,6 +50,18 @@ const routes = [
     component: RuanganPage,
     name: "ruangan",
   },
+  {
+    path: "/create-ruangan",
+    component: CreateRuangan,
+    name: "create.ruangan",
+  },
+  {
+    path: "/ruangan-update/:id",
+    component: UpdateRuangan,
+    name: "update.ruangan",
+  },
+
+  //** Nilai */
   {
     path: "/nilai",
     component: NilaiPage,
@@ -52,11 +72,7 @@ const routes = [
     component: AbsensiPage,
     name: "absen",
   },
-  {
-    path: "/ruangan",
-    component: RuanganPage,
-    name: "ruangan",
-  },
+
   {
     path: "/jadwal",
     component: JadwalPage,

@@ -23,7 +23,7 @@ class UpdateMapelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'kode'  => 'required | unique:mapels',
+            'kelas'  => 'required',
             'mapel'  => 'required'
         ];
     }

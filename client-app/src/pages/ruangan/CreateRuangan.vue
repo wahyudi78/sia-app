@@ -1,29 +1,29 @@
 <script setup>
 import { computed, reactive, ref, onMounted } from "vue";
-import { createMapel, allMapel } from "../../http/mapel";
+import { createRuangan } from "../../http/ruangan";
 import { useRouter } from "vue-router";
 
 const data = reactive({
-  mapel: "",
+  ruangan: "",
   kelas: "",
 });
 const validation = reactive({
-  mapel: "",
+  ruangan: "",
   kelas: "",
 });
 const router = useRouter();
 
 const create = async () => {
-  await createMapel(data)
+  await createRuangan(data)
     .then((response) => {
-      console.log(response);
-      router.push({ name: "mapel" });
+      // console.log(response);
+      router.push({ name: "ruangan" });
 
       //   mapel.value = data.data;
     })
     .catch(function (error) {
       if (error.response) {
-        validation.mapel = error.response.data.errors["mapel"];
+        validation.ruangan = error.response.data.errors["ruangan"];
         validation.kelas = error.response.data.errors["kelas"];
       } else if (error.request) {
         validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
@@ -34,18 +34,18 @@ const create = async () => {
       }
       //   console.log("error" + error.config);
     });
-  console.log(validation);
+  // console.log(validation);
 };
 </script>
 
 <template>
   <div class="card p-3 m-5 w-50">
     <form @submit.prevent="create">
-      <h3>Tambah Mata Pelajaran</h3>
+      <h3>Tambah Ruangan</h3>
       <div class="form-group">
-        <label for="mapel">Mata Pelajaran</label>
-        <input v-model="data.mapel" type="text" class="form-control" id="mapel" placeholder="Masukan Nama Mapel" />
-        <span class="text-danger text-center">{{ validation.mapel }}</span>
+        <label for="mapel">Ruangan</label>
+        <input v-model="data.ruangan" type="text" class="form-control" id="ruangan" placeholder="Masukan Nama ruangan" />
+        <span class="text-danger text-center">{{ validation.ruangan }}</span>
       </div>
       <div class="form-group">
         <label for="kelas">Kelas</label>

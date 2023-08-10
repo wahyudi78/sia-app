@@ -59,7 +59,8 @@ onMounted(async () => {
                 <td>{{ mapel.kelas }}</td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-info">Edit</button>
+                    <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
+
                     <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(mapel.id, index)">Delete</button>
                   </div>
                 </td>

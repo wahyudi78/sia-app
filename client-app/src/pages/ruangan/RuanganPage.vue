@@ -2,12 +2,27 @@
 import DataTable from "datatables.net-vue3";
 import DataTablesLib from "datatables.net";
 import { computed, ref, onMounted } from "vue";
-import { allRuangan } from "../http/ruangan";
-import Navbar from "../components/Navbar.vue";
+import { allRuangan, deleteRuangan } from "../../http/ruangan";
+import Navbar from "../../components/Navbar.vue";
 
 DataTable.use(DataTablesLib);
 
 const ruangan = ref([]);
+function destroy(id, index) {
+  deleteRuangan(id)
+    .then((response) => {
+      console.log(response);
+      ruangan.value.splice(index, 1);
+    })
+    .catch(function (error) {
+      if (error.response) {
+      } else if (error.request) {
+      } else {
+        console.log("Error", error.message);
+      }
+      console.log("error" + error.config);
+    });
+}
 
 onMounted(async () => {
   const { data } = await allRuangan();
@@ -22,6 +37,12 @@ onMounted(async () => {
   <Navbar />
   <div class="conatiner m-3">
     <div class="card p-3">
+      <h1>Data Ruangan</h1>
+      <div class="row m-4">
+        <div class="col-lg-5">
+          <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+        </div>
+      </div>
       <table class="table table-striped p-5">
         <!-- <DataTable :data="isGuru" class="display"> -->
         <div class="table table-hover">
@@ -41,8 +62,11 @@ onMounted(async () => {
                 <td>{{ ruangan.kelas }}</td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-info">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    <div class="btn-group">
+                      <router-link :to="{ name: 'update.ruangan', params: { id: ruangan.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
+
+                      <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(ruangan.id, index)">Delete</button>
+                    </div>
                   </div>
                 </td>
               </tr>

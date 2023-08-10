@@ -23,7 +23,8 @@ class UpdateRuanganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ruangan'  => 'required'
+            'ruangan'  => 'required',
+            'kelas'  => 'required'
 
         ];
     }

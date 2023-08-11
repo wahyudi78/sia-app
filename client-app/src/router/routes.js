@@ -27,6 +27,10 @@ const routes = [
     name: "login",
   },
   {
+    path: "/login",
+    redirect: "/",
+  },
+  {
     path: "/home",
     component: Homepage,
     name: "home",
@@ -43,11 +47,25 @@ const routes = [
     path: "/create-mapel",
     component: CreateMapel,
     name: "create.mapel",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/update-mapel/:id",
     component: UpdateMapel,
     name: "update.mapel",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   //** Raungan */
@@ -56,16 +74,37 @@ const routes = [
     path: "/ruangan",
     component: RuanganPage,
     name: "ruangan",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/create-ruangan",
     component: CreateRuangan,
     name: "create.ruangan",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/ruangan-update/:id",
     component: UpdateRuangan,
     name: "update.ruangan",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   //** Nilai */
@@ -83,11 +122,25 @@ const routes = [
     path: "/create-nilai",
     component: CreateNilai,
     name: "create.nilai",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/nilai-update/:id",
     component: UpdateNilai,
     name: "update.nilai",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   //**Absen */
@@ -95,6 +148,13 @@ const routes = [
     path: "/absen",
     component: AbsensiPage,
     name: "absen",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   {
@@ -108,16 +168,37 @@ const routes = [
     path: "/siswa",
     component: SiswaPage,
     name: "siswa",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/create-siswa",
     component: CreateSiswa,
     name: "create.siswa",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/siswa-update/:id",
     component: UpdateSiswa,
     name: "update.siswa",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   //**Guru */
@@ -130,11 +211,25 @@ const routes = [
     path: "/create-guru",
     component: CreateGuru,
     name: "create.guru",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
   {
     path: "/guru-update/:id",
     component: UpdateGuru,
     name: "update.guru",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1 && !localStorage.getItem("token").role) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   {

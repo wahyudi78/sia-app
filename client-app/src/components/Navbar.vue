@@ -3,6 +3,8 @@ import { onMounted } from "vue";
 import api from "../http/api";
 import { useRouter } from "vue-router";
 
+const router = useRouter();
+
 function logout() {
   const answer = window.confirm("Anda yakin ingin keluar dari aplikasi?");
   if (answer) {
@@ -14,10 +16,16 @@ function logout() {
       })
       .catch(function (error) {
         if (error.response) {
+          router.push({ name: "login" });
+          window.localStorage.clear();
         } else if (error.request) {
-          validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
+          router.push({ name: "login" });
+          window.localStorage.clear();
+          // validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
         } else {
-          validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
+          router.push({ name: "login" });
+          window.localStorage.clear();
+          // validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
 
           console.log("Error", error.message);
         }

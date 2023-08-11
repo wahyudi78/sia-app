@@ -9,8 +9,12 @@ import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
 import NilaiPage from "../pages/NilaiPage.vue";
 import AbsensiPage from "../pages/AbsensiPage.vue";
 import JadwalPage from "../pages/JadwalPage.vue";
-import SiswaPage from "../pages/SiswaPage.vue";
-import GuruPage from "../pages/GuruPage.vue";
+import CreateSiswa from "../pages/siswa/CreateSiswa.vue";
+import UpdateSiswa from "../pages/siswa/UpdateSiswa.vue";
+import SiswaPage from "../pages/siswa/SiswaPage.vue";
+import GuruPage from "../pages/guru/GuruPage.vue";
+import CreateGuru from "../pages/guru/CreateGuru.vue";
+import UpdateGuru from "../pages/guru/UpdateGuru.vue";
 import PembayaranPage from "../pages/PembayaranPage.vue";
 
 const routes = [
@@ -78,15 +82,39 @@ const routes = [
     component: JadwalPage,
     name: "jadwal",
   },
+
+  //** Siswa */
   {
     path: "/siswa",
     component: SiswaPage,
     name: "siswa",
   },
   {
+    path: "/create-siswa",
+    component: CreateSiswa,
+    name: "create.siswa",
+  },
+  {
+    path: "/siswa-update/:id",
+    component: UpdateSiswa,
+    name: "update.siswa",
+  },
+
+  //**Guru */
+  {
     path: "/guru",
     component: GuruPage,
     name: "guru",
+  },
+  {
+    path: "/create-guru",
+    component: CreateGuru,
+    name: "create.guru",
+  },
+  {
+    path: "/guru-update/:id",
+    component: UpdateGuru,
+    name: "update.guru",
   },
 
   {

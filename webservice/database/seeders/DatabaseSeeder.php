@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Ruangan::factory(2)->create();
         Pembayaran::factory(2)->create();
         Absensi::factory(2)->create();
-        Nilai::factory(2)->create();
         Jadwal::factory(2)->create();
+        Nilai::factory(2)->create();
     }
 }

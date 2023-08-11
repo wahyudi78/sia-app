@@ -23,17 +23,11 @@ class LoginController extends Controller
 
         if(!$user || !Hash::check($request->password, $user->password)){
             throw ValidationException::withMessages([
-                'username' => ['username incorect']
+                'username' => 'username incorect'
             ]);
         }
 
-        // $role = $user->role;
-        if($user->role == 3){
-            $detail = Siswa::where('user_account', $user->id)->first();
-        }elseif($user->role == 2){
-            $detail = Guru::where('user_account', $user->id)->first();
-        }
-        $detail = null;
+       
 
         return response()->json([
             'user'  => $user,

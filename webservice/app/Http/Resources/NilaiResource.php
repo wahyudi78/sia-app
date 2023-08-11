@@ -24,12 +24,9 @@ class NilaiResource extends JsonResource
             'nilai' => $this->nilai ,
             'waktu' => $this->waktu,
             // 'guru' => new GuruResource($this->gurus),
-            'siswa' => new UserResource($this->user),
-            'guru' => User::where('id', $this->guru_id)->first(),
-            // 'guru' => $this->guru_id,
+            'guru' => new UserResource($this->user),
+            'jadwal' => new JadwalResource($this->jadwal),
             
-            'ruang' => new RuanganResource($this->ruangan), 
-            'mapel' => new MapelResource($this->mapel)
           ];
     }
 }

@@ -1,20 +1,10 @@
 <script setup>
 import { computed, ref, onMounted } from "vue";
 
+const user = JSON.parse(localStorage.getItem("datauser"));
 onMounted(async () => {
-  const user = JSON.parse(localStorage.getItem("datauser"));
-  const isOpen = ref(true);
-
-  function menu() {
-    if (user.role == "2") {
-      !isOpen;
-    }
-  }
-
-  console.log(user.role);
   return {
     user,
-    menu,
   };
 });
 </script>
@@ -27,7 +17,7 @@ onMounted(async () => {
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div>
-      <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+      <div class="sidebar-brand-text mx-3">SI <sup>Akademik</sup></div>
     </a>
 
     <!-- Divider -->
@@ -45,25 +35,9 @@ onMounted(async () => {
     <hr class="sidebar-divider" />
 
     <!-- Heading -->
-    <div class="sidebar-heading">Interface</div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Mata Pelajaran</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Mapel</h6>
-          <a class="collapse-item" href="buttons.html">Buttons</a>
-          <a class="collapse-item" href="cards.html">Cards</a>
-        </div>
-      </div>
-    </li> -->
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li v-if="user.role == 1" class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#master" aria-expanded="true" aria-controls="master">
         <i class="fas fa-fw fa-data"></i>
         <span>Master Data</span>
@@ -78,7 +52,7 @@ onMounted(async () => {
         </div>
       </div>
     </li>
-    <li :hidden="isOpen" class="nav-item">
+    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Layanan" aria-expanded="true" aria-controls="Layanan">
         <i class="fas fa-fw fa-service"></i>
         <span>Layanan</span>

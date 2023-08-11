@@ -16,7 +16,12 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        return JadwalResource::collection(Jadwal::all());
+        $data = JadwalResource::collection(Jadwal::all());
+        return response()->json([
+            'Status' => 200,
+            'message' => "Berhasil",
+            'data'  => $data,
+        ]);
     }
 
     

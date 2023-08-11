@@ -6,20 +6,25 @@ import Navbar from "../../components/Navbar.vue";
 
 const mapel = ref([]);
 
+const user = JSON.parse(localStorage.getItem("datauser"));
+
 function destroy(id, index) {
-  deleteMapel(id)
-    .then((response) => {
-      console.log(response);
-      mapel.value.splice(index, 1);
-    })
-    .catch(function (error) {
-      if (error.response) {
-      } else if (error.request) {
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log("error" + error.config);
-    });
+  const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+  if (answer) {
+    deleteMapel(id)
+      .then((response) => {
+        console.log(response);
+        mapel.value.splice(index, 1);
+      })
+      .catch(function (error) {
+        if (error.response) {
+        } else if (error.request) {
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log("error" + error.config);
+      });
+  }
 }
 
 onMounted(async () => {
@@ -35,7 +40,7 @@ onMounted(async () => {
     <div class="card p-3">
       <!-- Button trigger modal -->
       <h1>Data Mata Pelajaran</h1>
-      <div class="row m-4">
+      <div v-if="user.role == 2 || user.role == 1" class="row m-4">
         <div class="col-lg-5">
           <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
         </div>

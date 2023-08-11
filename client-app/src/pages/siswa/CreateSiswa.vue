@@ -31,7 +31,7 @@ const validation = reactive({
 const router = useRouter();
 
 const create = async () => {
-  data.password = bcrypt.hashSync(data.username, salt);
+  data.password = data.username;
   await createSiswa(data)
     .then((response) => {
       // console.log(response);

@@ -6,7 +6,10 @@ import UpdateMapel from "../pages/mapel/UpdateMapel.vue";
 import RuanganPage from "../pages/ruangan/RuanganPage.vue";
 import CreateRuangan from "../pages/ruangan/CreateRuangan.vue";
 import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
-import NilaiPage from "../pages/NilaiPage.vue";
+import NilaiPage from "../pages/nilai/NilaiPage.vue";
+import ViewNilai from "../pages/nilai/ViewNilai.vue";
+import CreateNilai from "../pages/nilai/CreateNilai.vue";
+import UpdateNilai from "../pages/nilai/UpdateNilai.vue";
 import AbsensiPage from "../pages/AbsensiPage.vue";
 import JadwalPage from "../pages/JadwalPage.vue";
 import CreateSiswa from "../pages/siswa/CreateSiswa.vue";
@@ -71,6 +74,23 @@ const routes = [
     component: NilaiPage,
     name: "nilai",
   },
+  {
+    path: "/view-nilai",
+    component: ViewNilai,
+    name: "view.nilai",
+  },
+  {
+    path: "/create-nilai",
+    component: CreateNilai,
+    name: "create.nilai",
+  },
+  {
+    path: "/nilai-update/:id",
+    component: UpdateNilai,
+    name: "update.nilai",
+  },
+
+  //**Absen */
   {
     path: "/absen",
     component: AbsensiPage,

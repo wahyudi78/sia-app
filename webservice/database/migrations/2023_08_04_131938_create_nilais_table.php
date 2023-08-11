@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
             $table->integer('nilai');
+            $table->foreignId('jadwal_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+
             // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             // $table->foreignId('mapel_id')->constrained()->cascadeOnDelete();
             // $table->foreignId('guru_id')->constrained()->cascadeOnDelete();
-            $table->datetime('waktu');
+            $table->date('waktu');
             $table->timestamps();
         });
     }
@@ -27,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        $table->dropForeign(['jadwal_id']);
+        $table->dropColumn(['jadwal_id']);
         Schema::dropIfExists('nilais');
     }
 };

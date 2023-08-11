@@ -16,19 +16,22 @@ const isSiswa = computed(() =>
 );
 
 function destroy(id, index) {
-  deleteSiswa(id)
-    .then((response) => {
-      console.log(response);
-      siswa.value.splice(index, 1);
-    })
-    .catch(function (error) {
-      if (error.response) {
-      } else if (error.request) {
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log("error" + error.config);
-    });
+  const answer = window.confirm("apakah anda yakin ingin menghapus data?");
+  if (answer) {
+    deleteSiswa(id)
+      .then((response) => {
+        console.log(response);
+        siswa.value.splice(index, 1);
+      })
+      .catch(function (error) {
+        if (error.response) {
+        } else if (error.request) {
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log("error" + error.config);
+      });
+  }
 }
 
 onMounted(async () => {

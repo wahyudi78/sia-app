@@ -1,4 +1,31 @@
 <script setup>
+import { onMounted } from "vue";
+import api from "../http/api";
+import { useRouter } from "vue-router";
+
+function logout() {
+  const answer = window.confirm("Anda yakin ingin keluar dari aplikasi?");
+  if (answer) {
+    api
+      .post("auth/logout")
+      .then((response) => {
+        router.push({ name: "login" });
+        window.localStorage.clear();
+      })
+      .catch(function (error) {
+        if (error.response) {
+        } else if (error.request) {
+          validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
+        } else {
+          validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
+
+          console.log("Error", error.message);
+        }
+        console.log("error" + error.config);
+      });
+  }
+}
+
 const user = JSON.parse(localStorage.getItem("datauser"));
 </script>
 
@@ -54,11 +81,11 @@ const user = JSON.parse(localStorage.getItem("datauser"));
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+          <!-- <div class="dropdown-divider"></div> -->
+          <button class="dropdown-item" @click="logout()">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout
-          </a>
+          </button>
         </div>
       </li>
     </ul>

@@ -12,19 +12,22 @@ const isGuru = computed(() =>
 );
 
 function destroy(id, index) {
-  deleteGuru(id)
-    .then((response) => {
-      console.log(response);
-      guru.value.splice(index, 1);
-    })
-    .catch(function (error) {
-      if (error.response) {
-      } else if (error.request) {
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log("error" + error.config);
-    });
+  const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+  if (answer) {
+    deleteGuru(id)
+      .then((response) => {
+        console.log(response);
+        guru.value.splice(index, 1);
+      })
+      .catch(function (error) {
+        if (error.response) {
+        } else if (error.request) {
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log("error" + error.config);
+      });
+  }
 }
 
 onMounted(async () => {

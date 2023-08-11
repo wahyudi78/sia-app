@@ -24,7 +24,7 @@ function login() {
       localStorage.setItem("datauser", JSON.stringify(response.data.user));
 
       // navigasi ke route home
-      router.push({ name: "home" });
+      router.push({ name: "home" }).fullPath;
     })
     .catch(function (error) {
       if (error.response) {

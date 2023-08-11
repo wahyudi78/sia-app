@@ -18,7 +18,7 @@ class AbsensiFactory extends Factory
     {
         return [
             'jenis'   => rand(1,2),
-            'waktu'  => fake()->datetime(),
+            'waktu'  => fake()->date(),
             'guru_id'    => 1,
             'ruangan_id'    =>1,
             'mapel_id'    =>1,

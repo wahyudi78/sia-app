@@ -1,6 +1,13 @@
 import api from "./api";
+import axios from "axios";
 
 const resource = "/v1/mapel";
+
+axios.interceptors.request.use(function (config) {
+  let token = JSON.parse(window.sessionStorage.getItem("token"));
+  config.headers["Authorization"] = "Bearer " + token;
+  return config;
+});
 
 export const allMapel = () => api.get(resource);
 

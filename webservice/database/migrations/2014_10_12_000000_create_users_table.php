@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('nomor_induk');
-            $table->datetime('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('agama');
             $table->string('alamat');
             $table->string('username')->unique();

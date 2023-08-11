@@ -22,12 +22,9 @@ class Nilai extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function mapel()
+    public function jadwal()
     {
-        return $this->belongsTo(Mapel::class);
+        return $this->belongsTo(Jadwal::class);
     }
-    public function ruangan()
-    {
-        return $this->belongsTo(Ruangan::class);
-    }
+    
 }

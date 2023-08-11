@@ -18,7 +18,7 @@ return new class extends Migration
             // $table->foreignId('ruang')->references('id')->on('ruangans')->onDelete('cascade');
             // $table->foreignId('mapel')->references('id')->on('mapels')->onDelete('cascade');
             $table->integer('jenis');
-            $table->datetime('waktu');
+            $table->date('waktu');
             $table->timestamps();
         });
        

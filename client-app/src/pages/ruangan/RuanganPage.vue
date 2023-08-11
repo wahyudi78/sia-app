@@ -8,20 +8,23 @@ import Navbar from "../../components/Navbar.vue";
 DataTable.use(DataTablesLib);
 
 const ruangan = ref([]);
-function destroy(id, index) {
-  deleteRuangan(id)
-    .then((response) => {
-      console.log(response);
-      ruangan.value.splice(index, 1);
-    })
-    .catch(function (error) {
-      if (error.response) {
-      } else if (error.request) {
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log("error" + error.config);
-    });
+const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+if (answer) {
+  function destroy(id, index) {
+    deleteRuangan(id)
+      .then((response) => {
+        console.log(response);
+        ruangan.value.splice(index, 1);
+      })
+      .catch(function (error) {
+        if (error.response) {
+        } else if (error.request) {
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log("error" + error.config);
+      });
+  }
 }
 
 onMounted(async () => {

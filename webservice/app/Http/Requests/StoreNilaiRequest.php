@@ -24,7 +24,7 @@ class StoreNilaiRequest extends FormRequest
         return [
             'nilai' => 'required',
             'user_id' => 'required',
-            'mapel_id' => 'required',
+            'jadwal_id' => 'required',
             
             'ruangan_id' => 'required',
             'waktu' => 'required',

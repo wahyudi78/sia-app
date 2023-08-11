@@ -12,13 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('nilais', function (Blueprint $table) {
-            $table->index('user_id');
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->unsignedBigInteger('guru_id');
- 
-            $table->foreign('guru_id')->references('id')->on('users');
-            $table->foreignId('mapel_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->foreignId('ruangan_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+
+            // $table->foreignId('jadwal_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
         });
     }
 
@@ -31,10 +27,9 @@ return new class extends Migration
 
              $table->dropForeign(['user_id']);
              $table->dropColumn(['user_id']);
-             $table->dropForeign(['mapel_id']);
-             $table->dropColumn(['mapel_id']);
-             $table->dropForeign(['ruangan_id']);
-             $table->dropColumn(['ruangan_id']);
+      
+            //  $table->dropForeign(['jadwal_id']);
+            //  $table->dropColumn(['jadwal_id']);
         });
     }
 };

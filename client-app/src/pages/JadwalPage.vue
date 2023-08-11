@@ -1,11 +1,9 @@
 <script setup>
-import DataTable from "datatables.net-vue3";
-import DataTablesLib from "datatables.net";
 import { computed, ref, onMounted } from "vue";
 import { allJadwal } from "../http/jadwal";
 import Navbar from "../components/Navbar.vue";
 
-DataTable.use(DataTablesLib);
+const user = JSON.parse(localStorage.getItem("datauser"));
 
 const jadwal = ref([]);
 
@@ -37,7 +35,7 @@ onMounted(async () => {
                 <th>KELAS</th>
                 <th>MULAI</th>
                 <th>SELESAI</th>
-                <th>ACTION</th>
+                <th v-if="user.role == 1 || user.role == 2">ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +47,7 @@ onMounted(async () => {
                 <td>{{ jadwal.kelas }}</td>
                 <td>{{ jadwal.mulai }}</td>
                 <td>{{ jadwal.selesai }}</td>
-                <td>
+                <td v-if="user.role == 1 || user.role == 2">
                   <div class="btn-group">
                     <button class="btn btn-sm btn-outline-info">Edit</button>
                     <button class="btn btn-sm btn-outline-danger">Delete</button>

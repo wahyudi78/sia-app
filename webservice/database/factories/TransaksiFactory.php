@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pembayaran>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaksi>
  */
-class PembayaranFactory extends Factory
+class TransaksiFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,11 +17,11 @@ class PembayaranFactory extends Factory
     public function definition(): array
     {
         return [
+            'kode'   => fake()->name(),
+            'pembayaran_id'   => 1,
             'user_id'  => 1,
-            'order_id'   => rand(),
-            'gross_amount'   => 1500000,
-            'waktu'    => fake()->date(),
-            'status'    => rand(1,3),
+            'status'    => 3,
+            'waktu' => fake()->datetime(),
         ];
     }
 }

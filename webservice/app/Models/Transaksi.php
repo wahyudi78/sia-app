@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Pembayaran extends Model
+class Transaksi extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -15,8 +14,9 @@ class Pembayaran extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function transaksi()
+    public function pembayaran()
     {
-        return $this->hasMany(Transaksi::class);
+        return $this->belongsTo(Pembayaran::class);
     }
+    
 }

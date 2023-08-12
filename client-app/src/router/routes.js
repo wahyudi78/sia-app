@@ -18,7 +18,9 @@ import SiswaPage from "../pages/siswa/SiswaPage.vue";
 import GuruPage from "../pages/guru/GuruPage.vue";
 import CreateGuru from "../pages/guru/CreateGuru.vue";
 import UpdateGuru from "../pages/guru/UpdateGuru.vue";
-import PembayaranPage from "../pages/PembayaranPage.vue";
+import PembayaranPage from "../pages/pembayaran/PembayaranPage.vue";
+import CreatePembayaran from "../pages/pembayaran/CreatePembayaran.vue";
+import UpdatePembayaran from "../pages/pembayaran/UpdatePembayaran.vue";
 
 const routes = [
   {

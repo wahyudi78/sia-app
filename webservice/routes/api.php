@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\v1\RuanganController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\v1\PembayaranController;
 use App\Http\Controllers\api\v1\UserDetailController;
+use App\Http\Controllers\api\v1\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     
     // Jadwal
     Route::apiResource('/jadwal', JadwalController::class);
+
+    //**Transaksi */
+    Route::apiResource('/transaksi', TransaksiController::class);
 });
 
 

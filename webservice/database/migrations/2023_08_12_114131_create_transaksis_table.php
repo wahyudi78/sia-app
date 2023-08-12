@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('transaksis', function (Blueprint $table) {
+            $table->id();
+            $table->string('kode');
+            $table->foreignId('pembayaran_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->integer('order_id');
-            $table->bigInteger('gross_amount');
-            $table->date('waktu');
+            $table->datetime('waktu');
             $table->integer('status');
             $table->timestamps();
         });
@@ -27,8 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $table->dropForeign(['user_id']);
-        $table->dropColumn(['user_id']);
-        Schema::dropIfExists('pembayarans');
+        Schema::dropIfExists('transaksis');
     }
 };

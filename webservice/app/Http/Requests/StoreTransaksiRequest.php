@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Http\Requests\StorePembayaranRequest;
 
-class UpdatePembayaranRequest extends FormRequest
+class StoreTransaksiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,11 @@ class UpdatePembayaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-           
-            'gross_amount'   => 'required',
-            'user_id'  => 'required',
-            'waktu'    => 'required',
-            'status'    => 'required',
+            'kode'   => 'required',
+            'pembayaran_id'   => 'required',
+            'user_id'   => 'required',
+            'waktu' => 'required',
+            'status' => 'required'
         ];
     }
 }

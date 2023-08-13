@@ -69,8 +69,7 @@ onMounted(async () => {
                   <div class="btn-group">
                     <!-- <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Update</router-link> -->
 
-                   
-                    <button class="btn btn-sm btn-outline-info" >Buka</button>
+                    <router-link :to="{ name: 'transaksi', params: { id: pembayaran.id } }" class="btn btn-sm btn-outline-info">Buka</router-link>
                     <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(pembayaran.id, index)">Delete</button>
                   </div>
                 </td>

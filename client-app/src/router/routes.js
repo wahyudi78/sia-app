@@ -36,8 +36,11 @@ import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
 import CreateSiswa from "../pages/siswa/CreateSiswa.vue";
 import SiswaPage from "../pages/siswa/SiswaPage.vue";
 import UpdateSiswa from "../pages/siswa/UpdateSiswa.vue";
-// import CreatePembayaran from "../pages/pembayaran/CreatePembayaran.vue";
-// import UpdatePembayaran from "../pages/pembayaran/UpdatePembayaran.vue";
+
+//**Route Transaksi */
+import CreateTransaksi from "../pages/transaksi/CreateTransaksi.vue";
+import TransaksiPage from "../pages/transaksi/TransaksiPage.vue";
+import UpdateTransaksi from "../pages/transaksi/UpdateTransaksi.vue";
 
 const routes = [
   {
@@ -152,7 +155,7 @@ const routes = [
     beforeEnter() {
       const user = JSON.parse(localStorage.getItem("datauser"));
       // alert(user.role);
-      if (user.role != 3 ) {
+      if (user.role != 3) {
         alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
@@ -287,6 +290,40 @@ const routes = [
     beforeEnter() {
       if (localStorage.getItem("datauser").role !== 1 && !localStorage.getItem("token").role) {
         alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  //**Transaksi */
+  {
+    path: "/transaksi/:id",
+    component: TransaksiPage,
+    name: "transaksi",
+  },
+  {
+    path: "/create-transaksi/:id",
+    component: CreateTransaksi,
+    name: "create.transaksi",
+    beforeEnter() {
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (!user) {
+        alert("Maaf anda tidak memiliki hak akses ");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  {
+    path: "/transaksi-update/:id",
+    component: UpdateTransaksi,
+    name: "update.transaksi",
+    beforeEnter() {
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (!user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }

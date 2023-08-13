@@ -18,7 +18,7 @@ class TransaksiResource extends JsonResource
             'id' => $this->id ,
             'kode' => $this->kode ,
             'pembayaran' => new PembayaranResource($this->pembayaran),
-            'Siswa' => new UserResource($this->user),
+            'siswa' => new UserResource($this->user),
             
             'waktu' => $this->waktu,
             'status' => $this->status

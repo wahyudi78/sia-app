@@ -57,8 +57,8 @@ class TransaksiController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => $pembayaran->gross_amount,
+                'order_id' => $request->kode,
+                'gross_amount' => $pembayaran->total,
             ),
             'customer_details' => array(
                 'first_name' => $user->name,

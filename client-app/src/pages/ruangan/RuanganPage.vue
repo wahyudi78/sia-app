@@ -1,14 +1,13 @@
 <script setup>
-import DataTable from "datatables.net-vue3";
-import DataTablesLib from "datatables.net";
 import { computed, ref, onMounted } from "vue";
 import { allRuangan, deleteRuangan } from "../../http/ruangan";
 import Navbar from "../../components/Navbar.vue";
 
-DataTable.use(DataTablesLib);
 
 const ruangan = ref([]);
-const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+function destroy(id, index) {
+
+  const answer = window.confirm("Apakah anda yakin ingin menghapus data?");
 if (answer) {
   function destroy(id, index) {
     deleteRuangan(id)
@@ -25,6 +24,8 @@ if (answer) {
         console.log("error" + error.config);
       });
   }
+}
+
 }
 
 onMounted(async () => {

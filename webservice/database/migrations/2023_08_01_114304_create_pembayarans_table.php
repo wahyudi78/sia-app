@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('pembayaran');
+            $table->string('bulan');
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
             $table->integer('order_id');
-            $table->bigInteger('gross_amount');
-            $table->date('waktu');
+            $table->bigInteger('total');
             $table->integer('status');
             $table->timestamps();
         });

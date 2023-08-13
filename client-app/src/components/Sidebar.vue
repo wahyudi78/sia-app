@@ -45,10 +45,10 @@ onMounted(async () => {
       <div id="master" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Mata Pelajaran</h6>
-          <router-link to="/mapel" class="collapse-item">Mata Pelajaran</router-link>
-          <router-link to="/ruangan" class="collapse-item" href="utilities-border.html">Ruangan</router-link>
+          <router-link to="mapel" class="collapse-item">Mata Pelajaran</router-link>
+          <router-link to="ruangan" class="collapse-item" href="utilities-border.html">Ruangan</router-link>
           <router-link to="siswa" class="collapse-item" href="utilities-animation.html">Siswa</router-link>
-          <router-link to="/guru" class="collapse-item" href="utilities-other.html">Guru</router-link>
+          <router-link to="guru" class="collapse-item" href="utilities-other.html">Guru</router-link>
         </div>
       </div>
     </li>

@@ -8,6 +8,7 @@ const guru = ref([]);
 const isGuru = computed(() =>
   guru.value.filter((guru) => {
     return guru.role == 2;
+    
   })
 );
 
@@ -33,7 +34,7 @@ function destroy(id, index) {
 onMounted(async () => {
   // const { data } = await allguru();
   // guru.value = data.data;
-  // console.log(isGuru.value[0].name);
+  console.log(isGuru);
   return {
     guru,
     isGuru,

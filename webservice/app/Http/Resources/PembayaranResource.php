@@ -16,10 +16,11 @@ class PembayaranResource extends JsonResource
     {
         return [
             'id' => $this->id ,
-            'siswa' => new UserResource($this->user),
-            'order_id' => $this->kode ,
-            'gross_amount' => $this->nominal ,
-            'waktu' => $this->waktu,
+            'pembayaran' => $this->pembayaran ,
+            'bulan' => $this->bulan ,
+            'guru' => new UserResource($this->user),
+            'order_id' => $this->order_id ,
+            'total' => $this->total ,
             'status' => $this->status
           ];
     }

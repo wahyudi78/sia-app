@@ -1,26 +1,43 @@
-import LoginPage from "../pages/LoginPage.vue";
-import Homepage from "../pages/Homepage.vue";
-import MapelPage from "../pages/mapel/MapelPage.vue";
-import CreateMapel from "../pages/mapel/CreateMapel.vue";
-import UpdateMapel from "../pages/mapel/UpdateMapel.vue";
-import RuanganPage from "../pages/ruangan/RuanganPage.vue";
-import CreateRuangan from "../pages/ruangan/CreateRuangan.vue";
-import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
-import NilaiPage from "../pages/nilai/NilaiPage.vue";
-import ViewNilai from "../pages/nilai/ViewNilai.vue";
-import CreateNilai from "../pages/nilai/CreateNilai.vue";
-import UpdateNilai from "../pages/nilai/UpdateNilai.vue";
 import AbsensiPage from "../pages/AbsensiPage.vue";
+
+import Homepage from "../pages/Homepage.vue";
+
 import JadwalPage from "../pages/JadwalPage.vue";
-import CreateSiswa from "../pages/siswa/CreateSiswa.vue";
-import UpdateSiswa from "../pages/siswa/UpdateSiswa.vue";
-import SiswaPage from "../pages/siswa/SiswaPage.vue";
-import GuruPage from "../pages/guru/GuruPage.vue";
+
+import LoginPage from "../pages/LoginPage.vue";
+
+//** Route Guru */
 import CreateGuru from "../pages/guru/CreateGuru.vue";
+import GuruPage from "../pages/guru/GuruPage.vue";
 import UpdateGuru from "../pages/guru/UpdateGuru.vue";
+
+//**Route Mapel */
+import CreateMapel from "../pages/mapel/CreateMapel.vue";
+import MapelPage from "../pages/mapel/MapelPage.vue";
+import UpdateMapel from "../pages/mapel/UpdateMapel.vue";
+
+//**Route Nilai */
+import CreateNilai from "../pages/nilai/CreateNilai.vue";
+import NilaiPage from "../pages/nilai/NilaiPage.vue";
+import UpdateNilai from "../pages/nilai/UpdateNilai.vue";
+import ViewNilai from "../pages/nilai/ViewNilai.vue";
+
+//**Route Pembayaran */
 import PembayaranPage from "../pages/pembayaran/PembayaranPage.vue";
 import CreatePembayaran from "../pages/pembayaran/CreatePembayaran.vue";
 import UpdatePembayaran from "../pages/pembayaran/UpdatePembayaran.vue";
+
+//**Route Ruangan */
+import CreateRuangan from "../pages/ruangan/CreateRuangan.vue";
+import RuanganPage from "../pages/ruangan/RuanganPage.vue";
+import UpdateRuangan from "../pages/ruangan/UpdateRuangan.vue";
+
+//**Route Siswa */
+import CreateSiswa from "../pages/siswa/CreateSiswa.vue";
+import SiswaPage from "../pages/siswa/SiswaPage.vue";
+import UpdateSiswa from "../pages/siswa/UpdateSiswa.vue";
+// import CreatePembayaran from "../pages/pembayaran/CreatePembayaran.vue";
+// import UpdatePembayaran from "../pages/pembayaran/UpdatePembayaran.vue";
 
 const routes = [
   {
@@ -39,7 +56,6 @@ const routes = [
   },
 
   //** Mata Pelajaran */
-
   {
     path: "/mapel",
     component: MapelPage,
@@ -50,8 +66,10 @@ const routes = [
     component: CreateMapel,
     name: "create.mapel",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 3) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1 && !user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -62,8 +80,10 @@ const routes = [
     component: UpdateMapel,
     name: "update.mapel",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1 && !user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -71,14 +91,15 @@ const routes = [
   },
 
   //** Raungan */
-
   {
     path: "/ruangan",
     component: RuanganPage,
     name: "ruangan",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1 && !user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -89,8 +110,10 @@ const routes = [
     component: CreateRuangan,
     name: "create.ruangan",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1 && !user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -101,8 +124,10 @@ const routes = [
     component: UpdateRuangan,
     name: "update.ruangan",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1 && !user) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -125,8 +150,10 @@ const routes = [
     component: CreateNilai,
     name: "create.nilai",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role == 3) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 3 ) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -158,7 +185,6 @@ const routes = [
       }
     },
   },
-
   {
     path: "/jadwal",
     component: JadwalPage,
@@ -234,10 +260,37 @@ const routes = [
     },
   },
 
+  //**Pembayaran */
   {
     path: "/pembayaran",
     component: PembayaranPage,
     name: "pembayaran",
+  },
+  {
+    path: "/create-pambayaran",
+    component: CreatePembayaran,
+    name: "create.pembayaran",
+    beforeEnter() {
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1) {
+        alert("Maaf anda tidak memiliki hak akses ");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  {
+    path: "/pambayaran-update/:id",
+    component: UpdatePembayaran,
+    name: "update.pambayaran",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role !== 1 && !localStorage.getItem("token").role) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 ];
 

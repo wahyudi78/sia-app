@@ -17,10 +17,7 @@ router.beforeEach(async (to, from) => {
     // redirect the user to the login page
     return { name: "home" };
   }
-  if (to.name == "create.mapel" && user.role !== 1) {
-    alert("anda tidak memiliki akses");
-    return { name: "login" };
-  }
+ 
 });
 
 export default router;

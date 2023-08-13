@@ -1,12 +1,7 @@
 <script setup>
 import { computed, reactive, ref, onMounted } from "vue";
-import { createSiswa } from "../../http/siswa";
-import { useRouter } from "vue-router";
-import bcrypt from "bcryptjs";
-
-const salt = bcrypt.genSaltSync(10);
-
-// const pass = ref(data.username);
+import { Siswa, updateSiswa } from "../../http/siswa";
+import { useRouter, useRoute } from "vue-router";
 
 const data = reactive({
   name: "",
@@ -28,16 +23,15 @@ const validation = reactive({
   kelas: "",
   username: "",
 });
+
 const router = useRouter();
-
-const create = async () => {
-  data.password = data.username;
-  await createSiswa(data)
+const route = useRoute();
+let id = route.params.id;
+const update = () => {
+  updateSiswa(id, data)
     .then((response) => {
-      // console.log(response);
+      console.log(response);
       router.push({ name: "siswa" });
-
-      //   mapel.value = data.data;
     })
     .catch(function (error) {
       if (error.response) {
@@ -56,13 +50,27 @@ const create = async () => {
       }
       //   console.log("error" + error.config);
     });
-  console.log(validation);
+  // console.log(validation);
 };
+
+onMounted(async () => {
+  await Siswa(id).then((result) => {
+    data.name = result.data.data.name;
+    data.nomor_induk = result.data.data.nomor_induk;
+    data.tanggal_lahir = result.data.data.tanggal_lahir;
+    data.agama = result.data.data.agama;
+    data.alamat = result.data.data.alamat;
+    data.kelas = result.data.data.kelas;
+    data.username = result.data.data.username;
+    data.password = result.data.data.password;
+    console.log(result.data.data.password);
+  });
+});
 </script>
 
 <template>
   <div class="card p-3 m-5 w-50">
-    <form @submit.prevent="create">
+    <form @submit.prevent="update">
       <h3>Tambah Siswa</h3>
       <div class="form-group">
         <label for="name">Nama Siswa</label>

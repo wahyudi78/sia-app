@@ -18,9 +18,10 @@ class PembayaranFactory extends Factory
     {
         return [
             'user_id'  => 1,
+            'pembayaran' => "Pembayaran SPP",
+            'bulan' => "Agustus",
             'order_id'   => rand(),
-            'gross_amount'   => 1500000,
-            'waktu'    => fake()->date(),
+            'total'   => 1500000,
             'status'    => rand(1,3),
         ];
     }

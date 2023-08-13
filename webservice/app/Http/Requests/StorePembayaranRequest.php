@@ -22,10 +22,11 @@ class StorePembayaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'   => 'required|unique:pembayarans',
+            'user_id'   => 'required',
+            'pembayaran'   => 'required',
+            'bulan'   => 'required',
             'order_id'   => 'required|unique:pembayarans',
-            'gross_amount'   => 'required',
-            'waktu'    => 'required',
+            'total'   => 'required',
             'status'    => 'required',
         ];
     }

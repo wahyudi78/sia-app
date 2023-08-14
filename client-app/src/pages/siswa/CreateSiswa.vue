@@ -2,9 +2,6 @@
 import { computed, reactive, ref, onMounted } from "vue";
 import { createSiswa } from "../../http/siswa";
 import { useRouter } from "vue-router";
-import bcrypt from "bcryptjs";
-
-const salt = bcrypt.genSaltSync(10);
 
 // const pass = ref(data.username);
 

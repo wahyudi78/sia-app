@@ -2,7 +2,10 @@ import AbsensiPage from "../pages/AbsensiPage.vue";
 
 import Homepage from "../pages/Homepage.vue";
 
-import JadwalPage from "../pages/JadwalPage.vue";
+//**Jadwal */
+import JadwalPage from "../pages/jadwal/JadwalPage.vue";
+import CreateJadwal from "../pages/jadwal/CreateJadwal.vue";
+import UpdateJadwal from "../pages/jadwal/UpdateJadwal.vue";
 
 import LoginPage from "../pages/LoginPage.vue";
 
@@ -155,7 +158,7 @@ const routes = [
     beforeEnter() {
       const user = JSON.parse(localStorage.getItem("datauser"));
       // alert(user.role);
-      if (user.role != 3) {
+      if (user.role == 3) {
         alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
@@ -188,10 +191,36 @@ const routes = [
       }
     },
   },
+
+  //**Jadwal */
   {
     path: "/jadwal",
     component: JadwalPage,
     name: "jadwal",
+  },
+  {
+    path: "/create-jadwal",
+    component: CreateJadwal,
+    name: "create.jadwal",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  {
+    path: "/jadwal-update/:id",
+    component: UpdateJadwal,
+    name: "update.jadwal",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
   },
 
   //** Siswa */

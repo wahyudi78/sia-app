@@ -8,6 +8,6 @@ export const Jadwal = (id) => api.get(resource + "/" + id);
 
 export const createJadwal = (jadwal) => api.post(resource, jadwal);
 
-export const updateJadwal = (id, jadwal) => api.put(resource + jadwal, jadwal);
+export const updateJadwal = (id, jadwal) => api.put(resource + "/" + id, jadwal);
 
-export const deleteJadwal = (id) => api.delete(resource + id);
+export const deleteJadwal = (id) => api.delete(resource + "/" + id);

@@ -1,5 +1,10 @@
 <script setup>
+import { onMounted } from "vue";
 import Navbar from "../components/Navbar.vue";
+import api from "../http/api";
+onMounted(() => {
+  api;
+});
 </script>
 
 <template>

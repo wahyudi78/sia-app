@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { reactive, ref } from "vue";
 import api from "../http/api";
 import { useRouter } from "vue-router";
+import setAuthHeader from "../http/setAuthHeader";
 
 const router = useRouter();
 const data = reactive({
@@ -22,7 +23,7 @@ function login() {
       // simpan data user dan token di storage
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("datauser", JSON.stringify(response.data.user));
-
+      // setAuthHeader(response.data.token);
       // navigasi ke route home
       router.replace({ name: "home" });
     })

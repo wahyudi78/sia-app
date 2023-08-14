@@ -17,8 +17,7 @@ class RuanganFactory extends Factory
     public function definition(): array
     {
         return [
-            'kelas'   => rand(1,2),
-            'ruangan'  => fake()->sentence()
+            'kelas'  => fake()->sentence()
         ];
     }
 }

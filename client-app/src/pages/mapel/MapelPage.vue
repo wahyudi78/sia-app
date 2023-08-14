@@ -9,7 +9,7 @@ const mapel = ref([]);
 const user = JSON.parse(localStorage.getItem("datauser"));
 
 function destroy(id, index) {
-  const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+  const answer = window.confirm("Apakah anda yakin, ingin menghapus data?");
   if (answer) {
     deleteMapel(id)
       .then((response) => {

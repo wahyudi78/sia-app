@@ -1,61 +1,109 @@
 <script setup>
 import { computed, reactive, ref, onMounted } from "vue";
-import { createMapel, allMapel } from "../../http/mapel";
+import { allSiswa } from "../../http/siswa";
+import { createNilai } from "../../http/nilai";
+import { allJadwal, Jadwal } from "../../http/jadwal";
 import { useRouter } from "vue-router";
+import { ModelListSelect } from "vue-search-select";
 
 const data = reactive({
-  mapel: "",
-  kelas: "",
+  nilai: "",
+  jadwal_id: "",
+  waktu: "",
+  user_id: "",
 });
 const validation = reactive({
-  mapel: "",
-  kelas: "",
+  nilai: "",
+  mapel_id: "",
+  waktu: "",
+  user_id: "",
 });
 const router = useRouter();
 
-const create = async () => {
-  await createMapel(data)
-    .then((response) => {
-      console.log(response);
-      router.push({ name: "mapel" });
+const user = JSON.parse(localStorage.getItem("datauser"));
 
-      //   mapel.value = data.data;
+const jadwal = ref([]);
+const siswa = ref([]);
+
+const isSiswa = computed(() =>
+  siswa.value.filter((siswa) => {
+    const role = user.role != 1 ? user.role : 3;
+    return siswa.role == role;
+  })
+);
+
+/**
+ * Fetches all available jadwal (schedule) data and stores it in the jadwal variable.
+ */
+async function optionJadwal() {
+  try {
+    const result = await allJadwal();
+    jadwal.value = result.data.data;
+  } catch (error) {
+    console.error("Failed to fetch jadwal data:", error);
+  }
+}
+
+function getMapel(item) {
+  return item.hari + " - Mapel: " + item.mapel.mapel + " - Kelas: " + item.ruangan.kelas + " Jam: " + item.mulai + " s/d " + item.selesai + " WIB";
+}
+function jadwalSelect(items, lastSelectItem) {
+  console.log(items);
+}
+
+function create() {
+  createNilai(data)
+    .then((response) => {
+      alert("data berhasil disimpan");
+      router.push({ name: "nilai" });
     })
     .catch(function (error) {
       if (error.response) {
-        validation.mapel = error.response.data.errors["mapel"];
-        validation.kelas = error.response.data.errors["kelas"];
       } else if (error.request) {
-        validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
       } else {
-        validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
-
         // console.log("Error", error.message);
       }
       //   console.log("error" + error.config);
     });
-  console.log(validation);
-};
+}
+
+onMounted(async () => {
+  allSiswa().then((response) => {
+    siswa.value = response.data.data;
+  });
+  optionJadwal();
+});
 </script>
 
 <template>
   <div class="card p-3 m-5 w-50">
     <form @submit.prevent="create">
-      <h3>Tambah Mata Pelajaran</h3>
+      <h3>Tambah Nilai</h3>
+
       <div class="form-group">
-        <label for="mapel">Mata Pelajaran</label>
-        <input v-model="data.mapel" type="text" class="form-control" id="mapel" placeholder="Masukan Nama Mapel" />
-        <span class="text-danger text-center">{{ validation.mapel }}</span>
+        <label for="hari">Pilih Jadwal</label>
+        <model-list-select :list="jadwal" v-model="data.jadwal_id" option-value="id" placeholder="select item" :custom-text="getMapel" @select="jadwalSelect"> </model-list-select>
+        <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
+
       <div class="form-group">
-        <label for="kelas">Kelas</label>
-        <select v-model="data.kelas" class="form-control" id="kelas">
-          <option value="1">KELAS I</option>
-          <option value="2">KELAS II</option>
-          <option value="3">KELAS III</option>
-        </select>
-        <span class="text-danger text-center">{{ validation.kelas }}</span>
+        <label for="bulan">Pilih Siswa</label>
+        <model-list-select :list="isSiswa == null ? siswa : isSiswa" v-model="data.user_id" option-value="id" option-text="name" placeholder="select item"> </model-list-select>
+        <!-- <span class="text-danger text-center">{{ validation.bulan }}</span> -->
       </div>
+
+      <div class="form-group">
+        <label for="nilai">Nilai</label>
+        <input v-model="data.nilai" max="100" type="number" class="form-control" id="nilai" placeholder="Masukan nilai Transaksi" />
+        <!-- <span class="text-danger text-center">{{ validation.waktu }}</span> -->
+      </div>
+
+      <div class="form-group">
+        <label for="waktu">waktu</label>
+        <input v-model="data.waktu" type="date" class="form-control" id="waktu" placeholder="Masukan waktu Transaksi" />
+        <!-- <span class="text-danger text-center">{{ validation.waktu }}</span> -->
+      </div>
+
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </div>

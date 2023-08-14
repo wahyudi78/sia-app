@@ -63,5 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaksi::class);
     }
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class);
+    }
     
 }

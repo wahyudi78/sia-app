@@ -24,7 +24,7 @@ class NilaiResource extends JsonResource
             'nilai' => $this->nilai ,
             'waktu' => $this->waktu,
             // 'guru' => new GuruResource($this->gurus),
-            'guru' => new UserResource($this->user),
+            'siswa' => new UserResource($this->user),
             'jadwal' => new JadwalResource($this->jadwal),
             
           ];

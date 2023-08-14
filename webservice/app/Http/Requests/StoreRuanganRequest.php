@@ -22,8 +22,7 @@ class StoreRuanganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ruangan'  => 'required|unique:ruangans',
-            'kelas'  => 'required',
+            'kelas'  => 'required|unique:ruangans',
         ];
     }
 }

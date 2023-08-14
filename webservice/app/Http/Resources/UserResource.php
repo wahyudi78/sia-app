@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\RuanganResource;
 use App\Http\Resources\UserDetailResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -25,7 +26,8 @@ class UserResource extends JsonResource
             'alamat' => $this->alamat ,
             'username' => $this->username ,
             'password' => $this->password ,
-            'kelas' => $this->kelas ,
+            'ruangan' => new RuanganResource($this->ruangan),
+            
             'role' => $this->role ,
             
           ];

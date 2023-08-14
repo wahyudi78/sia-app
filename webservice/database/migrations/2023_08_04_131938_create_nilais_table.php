@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('nilai');
             $table->foreignId('jadwal_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-
-            // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            // $table->foreignId('mapel_id')->constrained()->cascadeOnDelete();
-            // $table->foreignId('guru_id')->constrained()->cascadeOnDelete();
             $table->date('waktu');
             $table->timestamps();
         });

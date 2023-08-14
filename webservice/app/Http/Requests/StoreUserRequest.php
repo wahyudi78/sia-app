@@ -29,7 +29,7 @@ class StoreUserRequest extends FormRequest
             'alamat'  => 'required',
             'username'  => 'required',
             'password'  => 'required',
-            'kelas'  => 'required',
+            'ruangan_id'  => 'required',
             'role'  => 'required',
 
         ];

@@ -4,11 +4,9 @@ import { Ruangan, updateRuangan } from "../../http/ruangan";
 import { useRouter, useRoute } from "vue-router";
 
 const data = reactive({
-  ruangan: "",
   kelas: "",
 });
 const validation = reactive({
-  ruangan: "",
   kelas: "",
 });
 
@@ -23,8 +21,7 @@ const update = () => {
     })
     .catch(function (error) {
       if (error.response) {
-        validation.ruangan = error.response.data.errors["ruangan"];
-        validation.kelas = error.response.data.errors["kelas"];
+        validation.ruangan = error.response.data.errors["kelas"];
       } else if (error.request) {
         validation.nError = "Gagal terhubung ke server, silahkan periksa koneksi anda";
       } else {
@@ -39,7 +36,6 @@ const update = () => {
 
 onMounted(async () => {
   await Ruangan(id).then((result) => {
-    data.ruangan = result.data.data.ruangan;
     data.kelas = result.data.data.kelas;
   });
 });
@@ -48,22 +44,13 @@ onMounted(async () => {
 <template>
   <div class="card p-3 m-5 w-50">
     <form @submit.prevent="update">
-      <h3>Tambah Mata Pelajaran</h3>
+      <h3>Tambah Ruangan</h3>
       <div class="form-group">
-        <label for="mapel">Mata Pelajaran</label>
-        <input v-model="data.ruangan" type="text" class="form-control" id="ruangan" placeholder="Masukan Nama ruangan" />
-        <span class="text-danger text-center">{{ validation.ruangan }}</span>
-      </div>
-      <div class="form-group">
-        <label for="kelas">Kelas</label>
-        <select v-model="data.kelas" :selected="data.kelas" class="form-control" id="kelas">
-          <option value="1">KELAS I</option>
-          <option value="2">KELAS II</option>
-          <option value="3">KELAS III</option>
-        </select>
+        <label for="kelas">Nama Kelas</label>
+        <input v-model="data.kelas" type="text" class="form-control" id="kelas" placeholder="Masukan Nama kelas" />
         <span class="text-danger text-center">{{ validation.kelas }}</span>
       </div>
-      <h4>ruangan :{{ data.ruangan }} kelas={{ data.kelas }}</h4>
+
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </div>

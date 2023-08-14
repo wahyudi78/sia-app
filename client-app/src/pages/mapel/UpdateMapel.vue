@@ -74,7 +74,7 @@ onMounted(async () => {
         </select>
         <span class="text-danger text-center">{{ validation.kelas }}</span>
       </div>
-      <h4>mapel :{{ data.mapel }} kelas={{ data.kelas }}</h4>
+
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </div>

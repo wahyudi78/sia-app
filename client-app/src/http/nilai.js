@@ -10,4 +10,4 @@ export const createNilai = (nilai) => api.post(resource, nilai);
 
 export const updateNilai = (id, nilai) => api.put(resource + "/" + id, nilai);
 
-export const deleteNilai = (id) => api.delete(resource + id);
+export const deleteNilai = (id) => api.delete(resource + "/" + id);

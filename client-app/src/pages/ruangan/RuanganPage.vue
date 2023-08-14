@@ -3,13 +3,10 @@ import { computed, ref, onMounted } from "vue";
 import { allRuangan, deleteRuangan } from "../../http/ruangan";
 import Navbar from "../../components/Navbar.vue";
 
-
 const ruangan = ref([]);
 function destroy(id, index) {
-
   const answer = window.confirm("Apakah anda yakin ingin menghapus data?");
-if (answer) {
-  function destroy(id, index) {
+  if (answer) {
     deleteRuangan(id)
       .then((response) => {
         console.log(response);
@@ -24,8 +21,6 @@ if (answer) {
         console.log("error" + error.config);
       });
   }
-}
-
 }
 
 onMounted(async () => {
@@ -54,7 +49,6 @@ onMounted(async () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>RUANGAN</th>
                 <th>KELAS</th>
                 <th>ACTION</th>
               </tr>
@@ -62,7 +56,6 @@ onMounted(async () => {
             <tbody>
               <tr v-for="(ruangan, index) in ruangan" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td>{{ ruangan.ruangan }}</td>
                 <td>{{ ruangan.kelas }}</td>
                 <td>
                   <div class="btn-group">

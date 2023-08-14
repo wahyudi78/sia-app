@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('username')->unique();
             $table->string('password');
-            $table->integer('kelas');
            
             $table->integer('role');
             $table->rememberToken();

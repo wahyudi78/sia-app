@@ -18,5 +18,9 @@ class Ruangan extends Model
     {
         return $this->hasMany(Nilai::class);
     }
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }

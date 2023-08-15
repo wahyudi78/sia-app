@@ -67,5 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ruangan::class);
     }
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class);
+    }
     
 }

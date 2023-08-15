@@ -5,6 +5,7 @@
 // use App\Models\UserDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\GuruController;
 use App\Http\Controllers\Api\v1\UserController;
@@ -17,9 +18,9 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\v1\AbsensiController;
 use App\Http\Controllers\Api\v1\RuanganController;
 use App\Http\Controllers\Api\Auth\LogoutController;
+use App\Http\Controllers\api\v1\TransaksiController;
 use App\Http\Controllers\Api\v1\PembayaranController;
 use App\Http\Controllers\api\v1\UserDetailController;
-use App\Http\Controllers\api\v1\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,17 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     // user
     Route::apiResource('/users', UserController::class);
+
+    Route::get('/siswa',[UserController::class, 'siswa']);
+    Route::get('/siswa/{id}', function ( $id) {
+        return new UserResource(User::findOrFail($id));
+    });
+    Route::post('/siswa',[UserController::class, 'store']);
+    Route::put('/siswa/{id}',[UserController::class, 'update']);
+
     // Route Siswa
-    Route::apiResource('/siswa', SiswaController::class);
+    // Route::apiResource('/siswa', SiswaController::class)->parameters([
+    //     'users' => 'id']);
 
     // Guru
     Route::apiResource('/guru', GuruController::class);

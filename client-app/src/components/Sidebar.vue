@@ -38,11 +38,11 @@ onMounted(async () => {
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li v-if="user.role == 1" class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#master" aria-expanded="true" aria-controls="master">
+      <a class="nav-link " href="#" data-toggle="collapse" data-target="#master" aria-expanded="true" aria-controls="master">
         <i class="fas fa-fw fa-data"></i>
         <span>Master Data</span>
       </a>
-      <div id="master" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div id="master" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Mata Pelajaran</h6>
           <router-link to="/mapel" class="collapse-item">Mata Pelajaran</router-link>
@@ -53,15 +53,16 @@ onMounted(async () => {
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Layanan" aria-expanded="true" aria-controls="Layanan">
+      <a class="nav-link " href="#" data-toggle="collapse" data-target="#Layanan" aria-expanded="true" aria-controls="Layanan">
         <i class="fas fa-fw fa-service"></i>
         <span>Layanan</span>
       </a>
-      <div id="Layanan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div id="Layanan" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Siswa</h6>
           <router-link to="/nilai" class="collapse-item" href="utilities-color.html">Nilai</router-link>
           <h6 class="collapse-header">Guru</h6>
+          <router-link to="/absensi" class="collapse-item" href="utilities-border.html">Absensi</router-link>
           <router-link to="/jadwal" class="collapse-item" href="utilities-border.html">Jadwal</router-link>
           <h6 class="collapse-header">Pembayaran</h6>
           <router-link to="/pembayaran" class="collapse-item" href="utilities-animation.html">Pembayaran SpP</router-link>

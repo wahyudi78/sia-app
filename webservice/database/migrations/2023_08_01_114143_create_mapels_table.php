@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('mapels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('kelas')->unique();
             $table->string('mapel');
             $table->timestamps();
         });

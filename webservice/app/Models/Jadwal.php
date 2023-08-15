@@ -25,4 +25,8 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Nilai::class);
     }
+    public function absensi()
+    {
+        return $this->belongsTo(Absensi::class);
+    }
 }

@@ -17,11 +17,12 @@ class AbsensiFactory extends Factory
     public function definition(): array
     {
         return [
-            'jenis'   => rand(1,2),
+            'keterangan'   => rand(1,2),
             'waktu'  => fake()->date(),
-            'guru_id'    => 1,
-            'ruangan_id'    =>1,
-            'mapel_id'    =>1,
+            'jam'  => fake()->time(),
+            'jadwal_id' => 1,
+            'user_id'    => 1,
+           
         ];
     }
 }

@@ -73,4 +73,11 @@ class UserController extends Controller
             'message' => "Berhasil"
         ]);
     }
+
+
+    //**Siswa */
+    public function siswa(User $user)
+    {
+           return $data = UserResource::collection(User::all())->whereStrict('role',3);
+    }
 }

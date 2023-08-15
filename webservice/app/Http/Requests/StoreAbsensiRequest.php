@@ -22,9 +22,12 @@ class StoreAbsensiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'jenis'  => 'required',
-            'waktu'  => 'required',
-            'user'  => 'required',
+            
+            'user_id' => 'required',
+            'jadwal_id' => 'required',
+            'keterangan' => 'required',
+            'waktu' => 'required',
+            'jam' =>'required',
             
         ];
     }

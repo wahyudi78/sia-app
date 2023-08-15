@@ -22,7 +22,6 @@ class StoreMapelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kelas'  => 'required | unique:mapels',
             'mapel'  => 'required'
         ];
     }

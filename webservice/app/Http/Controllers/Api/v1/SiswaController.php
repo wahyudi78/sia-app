@@ -5,7 +5,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\Siswa;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiswaResource;
 use App\Http\Requests\StoreSiswaRequest;
@@ -18,14 +18,15 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $data = SiswaResource::collection(Siswa::all());
+        $data = SiswaResource::collection(User::all())->whereStrict ('role',3);
         return response()->json([
             'Status' => 200,
-            'message' => "Berhasil"
+            'message' => "Berhasil",
+            'data'=> $data
         ]);
     }
 
-    /**
+    /**`
      * Show the form for creating a new resource.
      */
     // public function create()
@@ -50,9 +51,10 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Siswa $siswa)
+    public function show( User $user)
     {
-        $data = SiswaResource::make($siswa);
+        
+        $data = SiswaResource::make($user);
         return response()->json([
             'Status' => 200,
             'message' => "Berhasil",

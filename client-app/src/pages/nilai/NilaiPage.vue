@@ -7,7 +7,8 @@ const nilai = ref([]);
 const user = JSON.parse(localStorage.getItem("datauser"));
 const isNilai = computed(() =>
   nilai.value.filter((nilai) => {
-    return nilai.jadwal.guru.id == user.id;
+    
+    return  user.role !== 1 ? nilai.jadwal.guru.id == user.id:nilai;
   })
 );
 

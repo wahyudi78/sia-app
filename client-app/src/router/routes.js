@@ -1,4 +1,3 @@
-import AbsensiPage from "../pages/AbsensiPage.vue";
 
 import Homepage from "../pages/Homepage.vue";
 
@@ -44,6 +43,12 @@ import UpdateSiswa from "../pages/siswa/UpdateSiswa.vue";
 import CreateTransaksi from "../pages/transaksi/CreateTransaksi.vue";
 import TransaksiPage from "../pages/transaksi/TransaksiPage.vue";
 import UpdateTransaksi from "../pages/transaksi/UpdateTransaksi.vue";
+
+//**Absensi */
+import AbsensiPage from "../pages/absensi/AbsensiPage.vue";
+import CreateAbsensi from "../pages/absensi/CreateAbsensi.vue";
+import UpdateAbsensi from "../pages/absensi/UpdateAbsensi.vue";
+
 
 const routes = [
   {
@@ -180,9 +185,35 @@ const routes = [
 
   //**Absen */
   {
-    path: "/absen",
+    path: "/absensi",
     component: AbsensiPage,
-    name: "absen",
+    name: "absensi",
+    beforeEnter() {
+      if (localStorage.getItem("datauser").role == 3) {
+        alert("Anda tidak punya akses");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  {
+    path: "/create-absensi",
+    component: CreateAbsensi,
+    name: "create.absensi",
+    beforeEnter() {
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role == 3) {
+        alert("Maaf anda tidak memiliki hak akses ");
+        // block navigation
+        return { name: "login" };
+      }
+    },
+  },
+  {
+    path: "/update-absensi/:id",
+    component: UpdateAbsensi,
+    name: "update.absensi",
     beforeEnter() {
       if (localStorage.getItem("datauser").role == 3) {
         alert("Anda tidak punya akses");
@@ -228,21 +259,17 @@ const routes = [
     path: "/siswa",
     component: SiswaPage,
     name: "siswa",
-    beforeEnter() {
-      if (localStorage.getItem("datauser").role == 3) {
-        alert("Anda tidak punya akses");
-        // block navigation
-        return { name: "login" };
-      }
-    },
+    
   },
   {
     path: "/create-siswa",
     component: CreateSiswa,
     name: "create.siswa",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -253,8 +280,10 @@ const routes = [
     component: UpdateSiswa,
     name: "update.siswa",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -272,8 +301,10 @@ const routes = [
     component: CreateGuru,
     name: "create.guru",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }
@@ -284,8 +315,10 @@ const routes = [
     component: UpdateGuru,
     name: "update.guru",
     beforeEnter() {
-      if (localStorage.getItem("datauser").role !== 1 && !localStorage.getItem("token").role) {
-        alert("Anda tidak punya akses");
+      const user = JSON.parse(localStorage.getItem("datauser"));
+      // alert(user.role);
+      if (user.role != 1) {
+        alert("Maaf anda tidak memiliki hak akses ");
         // block navigation
         return { name: "login" };
       }

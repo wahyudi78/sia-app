@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Guru;
 use App\Models\Mapel;
 use App\Models\Siswa;
 use App\Models\Ruangan;
@@ -15,27 +14,21 @@ class Absensi extends Model
     protected $guarded = ['id'];
 
     
-    public function guru()
+    public function user()
     {
-        return $this->belongsTo(Guru::class);
-        // return $this->belongsTo(Ruaangan::class);
+        return $this->belongsTo(User::class);
     }
     public function ruangan()
     {
         return $this->belongsTo(Ruangan::class);
-        // return $this->belongsTo(Ruaangan::class);
     }
     public function mapel()
     {
         return $this->belongsTo(Mapel::class);
-        // return $this->belongsTo(Ruaangan::class);
     }
-    // public function mapel()
-    // {
-    //     return $this->hasOne(Mapel::class);
-    // }
-    // public function ruangan()
-    // {
-    //     return $this->hasOne(Ruangan::class);
-    // }
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class);
+    }
+   
 }

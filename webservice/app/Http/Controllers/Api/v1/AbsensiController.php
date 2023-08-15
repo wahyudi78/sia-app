@@ -19,7 +19,7 @@ class AbsensiController extends Controller
        
         // $this->authorize('viewAny');
 
-        $absen = Absensi::with('guru')->get();
+        $absen = Absensi::with('user')->get();
         $data = AbsensiResource::collection($absen);
         return response()->json([
             'Status' => 200,

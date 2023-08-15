@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\GuruResource;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\MapelResource;
+use App\Http\Resources\JadwalResource;
 use App\Http\Resources\RuanganResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,12 +20,12 @@ class AbsensiResource extends JsonResource
     {
         return [
             'id' => $this->id ,
-            'jenis' => $this->jenis ,
+            'guru' => new UserResource($this->user),
+            'jadwal' => new JadwalResource($this->jadwal),
+
+            'keterangan' => $this->keterangan ,
             'waktu' => $this->waktu,
-            // 'guru' => new GuruResource($this->gurus),
-            'guru' => new GuruResource($this->guru),
-            'ruang' => new RuanganResource($this->ruangan), 
-            'mapel' => new MapelResource($this->mapel)
+            'jam' => $this->jam,
           ];
         // return parent::toArray($request);
     }

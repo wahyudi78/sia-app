@@ -1,4 +1,3 @@
-
 import Homepage from "../pages/Homepage.vue";
 
 //**Jadwal */
@@ -49,6 +48,10 @@ import AbsensiPage from "../pages/absensi/AbsensiPage.vue";
 import CreateAbsensi from "../pages/absensi/CreateAbsensi.vue";
 import UpdateAbsensi from "../pages/absensi/UpdateAbsensi.vue";
 
+//**Profile */
+//**Route Siswa */
+import ProfilePage from "../pages/profile/ProfilePage.vue";
+import UpdateProfile from "../pages/profile/UpdateProfile.vue";
 
 const routes = [
   {
@@ -66,12 +69,20 @@ const routes = [
     name: "home",
   },
 
+  //** Profile */
+  {
+    path: "/profile",
+    component: ProfilePage,
+    name: "profile",
+  },
+
   //** Mata Pelajaran */
   {
     path: "/mapel",
     component: MapelPage,
     name: "mapel",
   },
+
   {
     path: "/create-mapel",
     component: CreateMapel,
@@ -151,11 +162,7 @@ const routes = [
     component: NilaiPage,
     name: "nilai",
   },
-  {
-    path: "/view-nilai",
-    component: ViewNilai,
-    name: "view.nilai",
-  },
+
   {
     path: "/create-nilai",
     component: CreateNilai,
@@ -259,7 +266,6 @@ const routes = [
     path: "/siswa",
     component: SiswaPage,
     name: "siswa",
-    
   },
   {
     path: "/create-siswa",

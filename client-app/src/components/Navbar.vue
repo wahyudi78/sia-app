@@ -82,6 +82,7 @@ const user = JSON.parse(localStorage.getItem("datauser"));
       <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
 
       <!-- Nav Item - User Information -->
+
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.name }}</span>
@@ -89,7 +90,12 @@ const user = JSON.parse(localStorage.getItem("datauser"));
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+          <router-link :to="{ name: 'profile' }" class="dropdown-item">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            Profile
+          </router-link>
           <!-- <div class="dropdown-divider"></div> -->
+
           <button class="dropdown-item" @click="logout()">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout

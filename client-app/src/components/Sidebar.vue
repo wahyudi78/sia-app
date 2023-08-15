@@ -13,21 +13,22 @@ onMounted(async () => {
   <!-- Sidebar -->
   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+
+    <router-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div>
       <div class="sidebar-brand-text mx-3">SI <sup>Akademik</sup></div>
-    </a>
+    </router-link>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0" />
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <router-link class="nav-link" :to="{ name: 'home' }">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a
+        <span>Dashboard</span></router-link
       >
     </li>
 
@@ -38,7 +39,7 @@ onMounted(async () => {
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li v-if="user.role == 1" class="nav-item">
-      <a class="nav-link " href="#" data-toggle="collapse" data-target="#master" aria-expanded="true" aria-controls="master">
+      <a class="nav-link" href="#" data-toggle="collapse" data-target="#master" aria-expanded="true" aria-controls="master">
         <i class="fas fa-fw fa-data"></i>
         <span>Master Data</span>
       </a>
@@ -53,7 +54,7 @@ onMounted(async () => {
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link " href="#" data-toggle="collapse" data-target="#Layanan" aria-expanded="true" aria-controls="Layanan">
+      <a class="nav-link" href="#" data-toggle="collapse" data-target="#Layanan" aria-expanded="true" aria-controls="Layanan">
         <i class="fas fa-fw fa-service"></i>
         <span>Layanan</span>
       </a>
@@ -62,7 +63,7 @@ onMounted(async () => {
           <h6 class="collapse-header">Siswa</h6>
           <router-link to="/nilai" class="collapse-item" href="utilities-color.html">Nilai</router-link>
           <h6 class="collapse-header">Guru</h6>
-          <router-link v-if="user.role !==3" to="/absensi" class="collapse-item" href="utilities-border.html">Absensi</router-link>
+          <router-link v-if="user.role !== 3" to="/absensi" class="collapse-item" href="utilities-border.html">Absensi</router-link>
           <router-link to="/jadwal" class="collapse-item" href="utilities-border.html">Jadwal</router-link>
           <h6 class="collapse-header">Pembayaran</h6>
           <router-link to="/pembayaran" class="collapse-item" href="utilities-animation.html">Pembayaran SpP</router-link>

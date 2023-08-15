@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
         
         Ruangan::factory(2)->create();
         User::factory(3)->create();
-        Siswa::factory(2)->create();
-        Guru::factory(2)->create();
+        // Siswa::factory(2)->create();
+        // Guru::factory(2)->create();
         Mapel::factory(2)->create();
         Pembayaran::factory(2)->create();
-        Absensi::factory(2)->create();
         Jadwal::factory(2)->create();
+        Absensi::factory(2)->create();
         Nilai::factory(2)->create();
     }
 }

@@ -9,7 +9,7 @@ const jadwal = ref([]);
 
 const isGuru = computed(() =>
   jadwal.value.filter((jadwal) => {
-    return jadwal.guru.id == user.id;
+    return user.role == 2 ? jadwal.guru.id == user.id : user.role == 3 ? jadwal.ruangan.id == user.ruangan_id : jadwal;
   })
 );
 
@@ -64,7 +64,7 @@ onMounted(async () => {
                 <th>KELAS</th>
                 <th>MULAI</th>
                 <th>SELESAI</th>
-                <th v-if="user.role == 1 || user.role == 2">ACTION</th>
+                <th v-if="user.role !== 3">ACTION</th>
               </tr>
             </thead>
             <tbody v-if="user.role == 1">
@@ -76,7 +76,7 @@ onMounted(async () => {
                 <td>{{ jadwal.kelas }}</td>
                 <td>{{ jadwal.mulai }}</td>
                 <td>{{ jadwal.selesai }}</td>
-                <td v-if="user.role == 1 || user.role == 2">
+                <td v-if="user.role !==3">
                   <div class="btn-group">
                     <button class="btn btn-sm btn-outline-info">Edit</button>
                     <button class="btn btn-sm btn-outline-danger">Delete</button>

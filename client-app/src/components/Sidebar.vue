@@ -62,7 +62,7 @@ onMounted(async () => {
           <h6 class="collapse-header">Siswa</h6>
           <router-link to="/nilai" class="collapse-item" href="utilities-color.html">Nilai</router-link>
           <h6 class="collapse-header">Guru</h6>
-          <router-link to="/absensi" class="collapse-item" href="utilities-border.html">Absensi</router-link>
+          <router-link v-if="user.role !==3" to="/absensi" class="collapse-item" href="utilities-border.html">Absensi</router-link>
           <router-link to="/jadwal" class="collapse-item" href="utilities-border.html">Jadwal</router-link>
           <h6 class="collapse-header">Pembayaran</h6>
           <router-link to="/pembayaran" class="collapse-item" href="utilities-animation.html">Pembayaran SpP</router-link>

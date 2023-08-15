@@ -46,7 +46,7 @@ function destroy(id, index) {
   <div class="conatiner m-3">
     <div class="card p-3">
       <table class="table table-striped p-5">
-        <div class="col-lg-5">
+        <div v-if="user.role!==3" class="col-lg-5">
           <router-link :to="{ name: 'create.nilai' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Nilai </router-link>
         </div>
         <div class="table table-hover">
@@ -63,7 +63,8 @@ function destroy(id, index) {
                 <th v-if="user.role == 1 || user.role == 2">ACTION</th>
               </tr>
             </thead>
-            <tbody>
+           
+            <tbody >
               <tr v-for="(isNilai, index) in isNilai" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ isNilai.siswa.nomor_induk }}</td>

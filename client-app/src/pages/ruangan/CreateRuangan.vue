@@ -37,6 +37,11 @@ const create = async () => {
 
 <template>
   <div class="card p-3 m-5 w-50">
+    <div class="row m-4">
+      <div class="col-lg-5">
+        <router-link :to="{ name: 'ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Batal </router-link>
+      </div>
+    </div>
     <form @submit.prevent="create">
       <h3>Tambah Kelas</h3>
       <div class="form-group">

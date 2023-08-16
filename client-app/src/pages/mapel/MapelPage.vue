@@ -40,9 +40,9 @@ onMounted(async () => {
     <div class="card p-3">
       <!-- Button trigger modal -->
       <h1>Data Mata Pelajaran</h1>
-      <div v-if="user.role == 2 || user.role == 1" class="row m-4">
+      <div v-if="user.role == 1" class="row m-4">
         <div class="col-lg-5">
-          <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+          <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Mata Pelajaran </router-link>
         </div>
       </div>
 
@@ -64,9 +64,9 @@ onMounted(async () => {
                 <td>{{ mapel.kelas }}</td>
                 <td>
                   <div class="btn-group">
-                    <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
+                    <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Edit</router-link>
 
-                    <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(mapel.id, index)">Delete</button>
+                    <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(mapel.id, index)">Hapus</button>
                   </div>
                 </td>
               </tr>

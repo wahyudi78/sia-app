@@ -4,7 +4,7 @@ import { Jadwal, allJadwal, updateJadwal } from "../../http/jadwal";
 import Navbar from "../../components/Navbar.vue";
 
 import { allMapel } from "../../http/mapel";
-import { allGuru } from "../../http/guru";
+import { allGuru, Guru } from "../../http/guru";
 import { allRuangan } from "../../http/ruangan";
 import { useRouter, useRoute } from "vue-router";
 import { ModelListSelect } from "vue-search-select";
@@ -26,17 +26,15 @@ const data = reactive({
   hari: "",
   mulai: "",
   selesai: "",
-  kelas: "",
   ruangan_id: "",
 });
 const validation = reactive({
-  guru: "",
-  mapel: "",
+  user_id: "",
+  mapel_id: "",
   hari: "",
   mulai: "",
   selesai: "",
-  kelas: "",
-  ruangan: "",
+  ruangan_id: "",
 });
 
 const hariOptioon = [
@@ -47,6 +45,30 @@ const hariOptioon = [
   { code: "JUM'AT", name: "JUM'AT", desc: "desc05" },
   { code: "SABTU", name: "SABTU", desc: "desc05" },
 ];
+
+async function getJadwal() {
+  await Jadwal(route.params.id).then((result) => {
+    console.log(result.data);
+    data.user_id = result.data.data.guru.id;
+    data.mapel_id = result.data.data.mapel.id;
+    data.hari = result.data.data.hari;
+    data.mulai = result.data.data.mulai;
+    data.selesai = result.data.data.selesai;
+    data.kelas = result.data.data.kelas;
+    data.ruangan_id = result.data.data.ruangan.id;
+    // console.log(result.data.data);
+    jadwal.value = result.data.data;
+    guru.value = result.data.data.guru;
+    // getGuru();
+  });
+}
+
+// function getGuru() {
+//   const id = data.user_id;
+//   Guru(id).then((result) => {
+//     guru.value = result.data.data;
+//   });
+// }
 
 function update() {
   updateJadwal(route.params.id, data)
@@ -84,23 +106,6 @@ function optionRuangan() {
     ruangan.value = result.data.data;
   });
 }
-function optionGuru() {
-  allGuru().then((result) => {
-    guru.value = result.data.data;
-  });
-}
-function getJadwal() {
-  Jadwal(route.params.id).then((result) => {
-    console.log(result.data);
-    data.user_id = result.data.data.guru.id;
-    data.mapel_id = result.data.data.mapel.id;
-    data.hari = result.data.data.hari;
-    data.mulai = result.data.data.mulai;
-    data.selesai = result.data.data.selesai;
-    data.kelas = result.data.data.kelas;
-    data.ruangan_id = result.data.data.ruangan.id;
-  });
-}
 
 onMounted(async () => {
   // const { data } = await Jadwal(route.params.id).then((result) => {
@@ -120,7 +125,6 @@ onMounted(async () => {
   getJadwal();
   optionMapel();
   optionRuangan();
-  optionGuru();
 });
 </script>
 
@@ -130,14 +134,14 @@ onMounted(async () => {
     <form @submit.prevent="update">
       <h3>Tambah Jadwal</h3>
 
-      <div v-if="user.role == 1" class="form-group">
+      <!-- <div v-if="user.role == 1" class="form-group">
         <label for="guru">Guru</label>
-        <model-list-select :list="guru" v-model="data.user_id" option-value="id" option-text="name" placeholder="select item"> </model-list-select>
+        <model-list-select :list="isGuru" v-model="data.user_id" option-value="id" option-text="name" placeholder="select item"> </model-list-select>
         <span class="text-danger text-center">{{ validation.bulan }}</span>
-      </div>
-      <div v-else class="form-group">
+      </div> -->
+      <div class="form-group">
         <label for="guru">Guru</label>
-        <input type="text" :value="user.name" disabled class="form-control" id="guru" placeholder="Masukan Nama guru" />
+        <input type="text" :value="guru.name" disabled class="form-control" id="guru" placeholder="Masukan Nama guru" />
       </div>
 
       <div class="form-group">
@@ -148,37 +152,34 @@ onMounted(async () => {
 
       <div class="form-group">
         <label for="ruangan">Ruangan</label>
-        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="ruangan" placeholder="select item"> </model-list-select>
+        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="kelas" placeholder="select item"> </model-list-select>
         <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
 
       <div class="form-group">
         <label for="ruangan">Hari</label>
-        <model-list-select :list="hariOptioon" v-model="data.hari" :selectedItem="data.hari" option-value="code" option-text="name" placeholder="select item"> </model-list-select>
+        <model-list-select :list="hariOptioon" v-model="data.hari" option-value="code" option-text="name" placeholder="select item"> </model-list-select>
         <!-- <span class="text-danger text-center">{{ validation.bulan }}</span> -->
       </div>
 
       <div class="form-group">
         <label for="mulai">Mulai</label>
-        <input v-model="data.mulai" type="time" class="form-control" id="mulai" step="2" placeholder="Masukan Nama mulai" />
+        <input v-model="data.mulai" type="time" class="form-control" id="mulai" step="1" placeholder="Masukan Nama mulai" />
       </div>
       <!-- <span class="text-danger text-center">{{ validation.mulai }}</span> -->
 
       <div class="form-group">
         <label for="selesai">Selesai</label>
-        <input v-model="data.selesai" type="time" class="form-control" id="selesai" step="2" placeholder="Masukan Nama mulai" />
+        <input v-model="data.selesai" type="time" class="form-control" id="selesai" step="1" placeholder="Masukan Nama mulai" />
         <!-- <span class="text-danger text-center">{{ validation.mulai }}</span> -->
       </div>
 
       <div class="form-group">
-        <label for="kelas">Kelas</label>
-        <select v-model="data.kelas" class="form-control" id="kelas">
-          <option value="1">KELAS I</option>
-          <option value="2">KELAS II</option>
-          <option value="3">KELAS III</option>
-        </select>
-        <!-- <span class="text-danger text-center">{{ validation.kelas }}</span> -->
+        <label for="ruangan">Kelas</label>
+        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="kelas" placeholder="select item"> </model-list-select>
+        <!-- <span class="text-danger text-center">{{ validation.bulan }}</span> -->
       </div>
+
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </div>

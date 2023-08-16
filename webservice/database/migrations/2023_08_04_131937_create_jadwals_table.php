@@ -19,7 +19,6 @@ return new class extends Migration
             $table->time('mulai');
             $table->time('selesai');
             $table->foreignId('ruangan_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->integer('kelas');
             $table->timestamps();
         });
     }

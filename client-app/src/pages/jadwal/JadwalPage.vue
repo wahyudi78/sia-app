@@ -60,7 +60,6 @@ onMounted(async () => {
                 <th>GURU</th>
 
                 <th>MATA PELAJARAN</th>
-                <th>RUANGAN</th>
                 <th>KELAS</th>
                 <th>MULAI</th>
                 <th>SELESAI</th>
@@ -72,14 +71,16 @@ onMounted(async () => {
                 <td>{{ index + 1 }}</td>
                 <td>{{ jadwal.guru.name }}</td>
                 <td>{{ jadwal.mapel.mapel }}</td>
-                <td>{{ jadwal.ruangan.ruangan }}</td>
-                <td>{{ jadwal.kelas }}</td>
+                <td>{{ jadwal.ruangan.kelas }}</td>
                 <td>{{ jadwal.mulai }}</td>
                 <td>{{ jadwal.selesai }}</td>
-                <td v-if="user.role !==3">
+                <td v-if="user.role !== 3">
                   <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-info">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    <div class="btn-group">
+                      <router-link :to="{ name: 'update.jadwal', params: { id: jadwal.id } }" class="btn btn-sm btn-outline-info">Edit</router-link>
+
+                      <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(jadwal.id, index)">Delete</button>
+                    </div>
                   </div>
                 </td>
               </tr>

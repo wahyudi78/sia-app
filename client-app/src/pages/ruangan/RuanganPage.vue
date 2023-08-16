@@ -39,7 +39,7 @@ onMounted(async () => {
       <h1>Data Ruangan</h1>
       <div class="row m-4">
         <div class="col-lg-5">
-          <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+          <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tamabh Ruangan </router-link>
         </div>
       </div>
       <table class="table table-striped p-5">
@@ -60,7 +60,7 @@ onMounted(async () => {
                 <td>
                   <div class="btn-group">
                     <div class="btn-group">
-                      <router-link :to="{ name: 'update.ruangan', params: { id: ruangan.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
+                      <router-link :to="{ name: 'update.ruangan', params: { id: ruangan.id } }" class="btn btn-sm btn-outline-info">Edit</router-link>
 
                       <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(ruangan.id, index)">Delete</button>
                     </div>

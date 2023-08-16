@@ -5,6 +5,7 @@ import { createNilai } from "../../http/nilai";
 import { allJadwal, Jadwal } from "../../http/jadwal";
 import { useRouter } from "vue-router";
 import { ModelListSelect } from "vue-search-select";
+import Navbar from "../../components/Navbar.vue";
 
 const data = reactive({
   nilai: "",
@@ -76,6 +77,8 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Navbar />
+
   <div class="card p-3 m-5 w-50">
     <form @submit.prevent="create">
       <h3>Tambah Nilai</h3>

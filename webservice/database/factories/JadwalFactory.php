@@ -22,7 +22,6 @@ class JadwalFactory extends Factory
             'hari' => fake()->name(),
             'mulai' => fake()->time(),
             'selesai' => fake()->time(),
-            'kelas' => 1,
             'ruangan_id'   => rand(1,2),
             
         ];

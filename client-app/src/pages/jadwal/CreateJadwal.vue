@@ -23,7 +23,6 @@ const data = reactive({
   hari: "",
   mulai: "",
   selesai: "",
-  kelas: "",
   ruangan_id: "",
 });
 const validation = reactive({
@@ -32,7 +31,6 @@ const validation = reactive({
   hari: "",
   mulai: "",
   selesai: "",
-  kelas: "",
   ruangan: "",
 });
 
@@ -121,12 +119,12 @@ onMounted(async () => {
 
       <div class="form-group">
         <label for="ruangan">Ruangan</label>
-        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="ruangan" placeholder="select item"> </model-list-select>
+        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="kelas" placeholder="select item"> </model-list-select>
         <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
 
       <div class="form-group">
-        <label for="ruangan">Ruangan</label>
+        <label for="ruangan">Hari</label>
         <model-list-select :list="hariOptioon" v-model="data.hari" option-value="code" option-text="name" placeholder="select item"> </model-list-select>
         <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
@@ -143,15 +141,6 @@ onMounted(async () => {
         <!-- <span class="text-danger text-center">{{ validation.mulai }}</span> -->
       </div>
 
-      <div class="form-group">
-        <label for="kelas">Kelas</label>
-        <select v-model="data.kelas" class="form-control" id="kelas">
-          <option value="1">KELAS I</option>
-          <option value="2">KELAS II</option>
-          <option value="3">KELAS III</option>
-        </select>
-        <!-- <span class="text-danger text-center">{{ validation.kelas }}</span> -->
-      </div>
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </div>

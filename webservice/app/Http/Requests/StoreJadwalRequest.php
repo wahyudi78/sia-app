@@ -27,7 +27,6 @@ class StoreJadwalRequest extends FormRequest
             'hari'  => 'required',
             'mulai'  => 'required',
             'selesai'  => 'required',
-            'kelas'  => 'required',
             'ruangan_id'  => 'required',
         ];
     }

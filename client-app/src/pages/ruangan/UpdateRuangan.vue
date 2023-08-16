@@ -43,6 +43,11 @@ onMounted(async () => {
 
 <template>
   <div class="card p-3 m-5 w-50">
+    <div class="row m-4">
+      <div class="col-lg-5">
+        <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tamabh Ruangan </router-link>
+      </div>
+    </div>
     <form @submit.prevent="update">
       <h3>Tambah Ruangan</h3>
       <div class="form-group">

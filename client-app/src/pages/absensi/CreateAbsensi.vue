@@ -6,33 +6,29 @@ import { allJadwal, Jadwal } from "../../http/jadwal";
 import { useRouter } from "vue-router";
 import { ModelListSelect } from "vue-search-select";
 import { allGuru } from "../../http/guru";
+import Navbar from "../../components/Navbar.vue";
 
 const user = JSON.parse(localStorage.getItem("datauser"));
 const router = useRouter();
 
-
 const jadwal = ref([]);
 const guru = ref([]);
 var times = new Date();
-var time = times.getHours() + ":" + times.getMinutes() + ":" + 
-            times.getSeconds();
+var time = times.getHours() + ":" + times.getMinutes() + ":" + times.getSeconds();
 const data = reactive({
-  keterangan : "",
+  keterangan: "",
   waktu: "",
   jam: time,
   jadwal_id: "",
-  user_id: user.role !== 1 ? user.role :  "",
+  user_id: user.role !== 1 ? user.role : "",
 });
 const validation = reactive({
-  keterangan : "",
+  keterangan: "",
   waktu: "",
   jam: "",
   jadwal_id: "",
-  user_id:  "",
+  user_id: "",
 });
-
-
-
 
 /**
  * Fetches all available jadwal (schedule) data and stores it in the jadwal variable.
@@ -41,20 +37,29 @@ async function optionJadwal() {
   try {
     const result = await allJadwal();
     jadwal.value = result.data.data;
-   
   } catch (error) {
-    console.error("Failed to fetch jadwal data:" +error);
+    console.error("Failed to fetch jadwal data:" + error);
   }
 }
+const isJadwal = computed(() =>
+  jadwal.value.filter((jadwal) => {
+    return user.role !== 1 ? jadwal.guru.id == user.id : jadwal;
+  })
+);
 async function optionGuru() {
   try {
     const result = await allGuru();
     guru.value = result.data.data;
-   
   } catch (error) {
-    console.error("Failed to fetch jadwal data:" +error);
+    console.error("Failed to fetch jadwal data:" + error);
   }
 }
+
+const isGuru = computed(() =>
+  guru.value.filter((guru) => {
+    return guru.role == 2;
+  })
+);
 
 function getMapel(item) {
   return item.hari + " - Mapel: " + item.mapel.mapel + " - Kelas: " + item.ruangan.kelas + " Jam: " + item.mulai + " s/d " + item.selesai + " WIB";
@@ -64,7 +69,6 @@ function jadwalSelect(items, lastSelectItem) {
 }
 
 function create() {
- 
   createAbsensi(data)
     .then((response) => {
       alert("data berhasil disimpan");
@@ -81,32 +85,33 @@ function create() {
 }
 
 onMounted(async () => {
- 
+  console.log(user);
   optionJadwal();
-  optionGuru()
+  optionGuru();
 });
 </script>
 
 <template>
+  <Navbar />
+
   <div class="card p-3 m-5 w-50">
     <form @submit.prevent="create">
-      <h3>Tambah Nilai</h3>
+      <h3>Tambah Absensi</h3>
 
-      <div class="form-group">
-        <label for="hari">Pilih Jadwal</label>
-        <model-list-select :list="jadwal" v-model="data.jadwal_id" option-value="id" placeholder="select item" :custom-text="getMapel" @select="jadwalSelect"> </model-list-select>
-        <span class="text-danger text-center">{{ validation.bulan }}</span>
-      </div>
-
-      <div v-if="user.role ==1" class="form-group">
+      <div v-if="user.role == 1" class="form-group">
         <label for="guru">Pilih Guru</label>
-        <model-list-select :list="guru == null ? siswa : guru" v-model="data.user_id" option-value="id" option-text="name" placeholder="select item"> </model-list-select>
+        <model-list-select :list="isGuru" v-model="data.user_id" option-value="id" option-text="name" placeholder="select item"> </model-list-select>
         <!-- <span class="text-danger text-center">{{ validation.bulan }}</span> -->
       </div>
       <div v-else class="form-group">
         <label for="guru">Guru</label>
-        <input v-model="data.user_id" disabled type="number" class="form-control" id="guru" placeholder=" " />
+        <input :value="user.name" disabled type="text" class="form-control" id="guru" placeholder=" " />
         <!-- <span class="text-danger text-center">{{ validation.waktu }}</span> -->
+      </div>
+      <div class="form-group">
+        <label for="hari">Pilih Jadwal</label>
+        <model-list-select :list="isJadwal" v-model="data.jadwal_id" option-value="id" placeholder="select item" :custom-text="getMapel" @select="jadwalSelect"> </model-list-select>
+        <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
 
       <div class="form-group">

@@ -21,7 +21,6 @@ class JadwalResource extends JsonResource
         'hari' => $this->hari ,
         'mulai' => $this->mulai,
         'selesai' => $this->selesai,
-        'kelas' => $this->kelas,
         'ruangan' =>  new RuanganResource($this->ruangan),
        ];
     }

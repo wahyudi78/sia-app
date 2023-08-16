@@ -47,7 +47,7 @@ function destroy(id, index) {
     <div class="card p-3">
       <table class="table table-striped p-5">
         <div class="col-lg-5">
-          <router-link :to="{ name: 'create.absensi' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Absensi </router-link>
+          <router-link :to="{ name: 'create.absensi' }" class="btn btn-outline-primary btn-sm rounded shadow mb-3"> Tambah Absensi </router-link>
         </div>
         <div class="table table-hover">
           <table class="table">

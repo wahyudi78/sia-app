@@ -1,12 +1,12 @@
 import api from "./api";
+import axios from "axios";
 
-export const authLogout = (mapel) => api.post("/auth/logout", mapel);
+
+// export const authLogout = (mapel) => api.post("/auth/logout", mapel);
 
 export const authLogin = async () => {
   try {
-    const response = await api.post(resource, data, {
-      headers: { Authorization: getAuthorizationHeader() },
-    });
+    const response = await axios.post("http://localhost:8000/api/", data);
 
     return response;
   } catch (error) {
@@ -16,9 +16,7 @@ export const authLogin = async () => {
 
 export const authLogout = async () => {
   try {
-    const response = await api.post("/auth/logout", data, {
-      headers: { Authorization: getAuthorizationHeader() },
-    });
+    const response = await axios.post("http://localhost:8000/api/auth/logout", data);
 
     return response;
   } catch (error) {

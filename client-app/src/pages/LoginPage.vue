@@ -1,9 +1,10 @@
 <script setup>
 import { onMounted } from "vue";
 import { reactive, ref } from "vue";
-import api from "../http/api";
 import { useRouter } from "vue-router";
-import setAuthHeader from "../http/setAuthHeader";
+import axios from "axios";
+import api from "../http/api";
+
 
 const router = useRouter();
 const data = reactive({
@@ -18,14 +19,14 @@ const validation = reactive({
 
 function login() {
   api
-    .post("auth/login", data)
+    .post("http://localhost:8000/api/auth/login", data)
     .then((response) => {
       // simpan data user dan token di storage
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("datauser", JSON.stringify(response.data.user));
       // setAuthHeader(response.data.token);
       // navigasi ke route home
-      router.replace({ name: "home" });
+      router.go({ name: "home" });
     })
     .catch(function (error) {
       if (error.response) {

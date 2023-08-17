@@ -94,6 +94,10 @@ const user = JSON.parse(localStorage.getItem("datauser"));
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             Profile
           </router-link>
+          <router-link :to="{ name: 'update.password' }" class="dropdown-item">
+            <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+            ubah password
+          </router-link>
           <!-- <div class="dropdown-divider"></div> -->
 
           <button class="dropdown-item" @click="logout()">

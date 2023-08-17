@@ -51,7 +51,7 @@ import UpdateAbsensi from "../pages/absensi/UpdateAbsensi.vue";
 //**Profile */
 //**Route Siswa */
 import ProfilePage from "../pages/profile/ProfilePage.vue";
-import UpdateProfile from "../pages/profile/UpdateProfile.vue";
+import UpdatePassword from "../pages/profile/UpdatePassword.vue";
 
 const routes = [
   {
@@ -74,6 +74,11 @@ const routes = [
     path: "/profile",
     component: ProfilePage,
     name: "profile",
+  },
+  {
+    path: "/ubah_password",
+    component: UpdatePassword,
+    name: "update.password",
   },
 
   //** Mata Pelajaran */

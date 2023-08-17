@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\v1\KelasController;
 use App\Http\Controllers\Api\v1\MapelController;
 use App\Http\Controllers\Api\v1\NilaiController;
 use App\Http\Controllers\Api\v1\SiswaController;
+use App\Http\Controllers\Api\Auth\ChangePassword;
 use App\Http\Controllers\Api\v1\JadwalController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\v1\AbsensiController;
@@ -36,6 +37,7 @@ use App\Http\Controllers\api\v1\UserDetailController;
 
 Route::prefix('auth')->group(function() {
     Route::post('/login', LoginController::class);
+    Route::post('/ubah_password', ChangePassword::class);
     Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
 });
 

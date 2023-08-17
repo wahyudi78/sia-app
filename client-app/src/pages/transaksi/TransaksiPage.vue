@@ -133,6 +133,7 @@ onMounted(async () => {
               <tr>
                 <th>No</th>
                 <th>Kode Transaksi</th>
+                <th>Siswa</th>
                 <th>Pembayaran</th>
                 <th>Status</th>
                 <th v-if="user.role == 4">Action</th>
@@ -142,6 +143,7 @@ onMounted(async () => {
               <tr v-for="(isTransaksi, index) in isTransaksi" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ isTransaksi.kode }}</td>
+                <td>{{ isTransaksi.siswa.name }}</td>
                 <td>{{ isTransaksi.pembayaran.pembayaran }}</td>
                 <td>{{ isTransaksi.status }}</td>
                 <td v-if="user.role == 4">

@@ -1,12 +1,20 @@
 <script setup>
 import { computed, ref, onMounted, reactive } from "vue";
 import { allPembayaran, deletePembayaran } from "../../http/pembayaran";
+import { createTransaksi } from "../../http/transaksi";
 import Navbar from "../../components/Navbar.vue";
 // import ModalMapel from "../components/mapel/modalMapel.vue";
 
 const pembayaran = ref([]);
 
 const user = JSON.parse(localStorage.getItem("datauser"));
+
+function dataPembayaran() {
+  allPembayaran().then((result) => {
+    pembayaran.value = result.data.data;
+    console.log(result.data);
+  });
+}
 
 function destroy(id, index) {
   const answer = window.confirm("Apakah anda yakin ingin menghapus data?");
@@ -27,17 +35,18 @@ function destroy(id, index) {
   }
 }
 
-
 const dataTransaksi = reactive({
-  kode: pembayaran.id+user.id,
-  pembayaran_id: pembayaran.id,
+  kode: user.id + user.role + user.ruangan_id + Math.floor(Math.random() * 999) + 100,
+  pembayaran_id: "",
   user_id: user.id,
   waktu: "2023-08-15",
   status: 1,
 });
 
+const create = async (id) => {
+  // alert(JSON.stringify(dataTransaksi));
+  dataTransaksi.pembayaran_id = id;
 
-const create = async () => {
   await createTransaksi(dataTransaksi)
     .then((response) => {
       pay(response.data.token);
@@ -52,8 +61,6 @@ const create = async () => {
       //   console.log("error" + error.config);
     });
 };
-
-
 
 function pay(token) {
   console.log(token);
@@ -84,14 +91,9 @@ function pay(token) {
   });
 }
 
-
-
-
-
 onMounted(async () => {
-  const { data } = await allPembayaran();
-  pembayaran.value = data.data;
-  destroy;
+  dataPembayaran();
+  // destroy;
 });
 </script>
 
@@ -101,7 +103,7 @@ onMounted(async () => {
     <div class="card p-3">
       <!-- Button trigger modal -->
       <h1>Data Pembayaran</h1>
-      <div v-if="user.role == 2 || user.role == 1" class="row m-4">
+      <div v-if="user.role !== 3" class="row m-4">
         <div class="col-lg-5">
           <router-link :to="{ name: 'create.pembayaran' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
         </div>
@@ -127,17 +129,13 @@ onMounted(async () => {
                 <td>{{ pembayaran.bulan }}</td>
                 <td>{{ pembayaran.total }}</td>
                 <td>
-                  <div v-if="user.role !==3" class="btn-group">
-                    <!-- <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Update</router-link> -->
-
+                  <div v-if="user.role !== 3" class="btn-group">
                     <router-link :to="{ name: 'transaksi', params: { id: pembayaran.id } }" class="btn btn-sm btn-outline-info">Buka</router-link>
                     <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(pembayaran.id, index)">Delete</button>
                   </div>
                   <div v-else class="btn-group">
-                    <!-- <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Update</router-link> -->
-
-                    <router-link @click="create()" class="btn btn-sm btn-outline-info">Bayar</router-link>
-                   
+                    <input type="text" disabled hidden v-model="pembayaran.id" />
+                    <button @click="create(pembayaran.id)" class="btn btn-sm btn-outline-info">Bayar</button>
                   </div>
                 </td>
               </tr>

@@ -32,7 +32,7 @@ const dataTransaksi = reactive({
 const validation = reactive({});
 
 const create = async () => {
-  dataTransaksi.kode = idPembayaran + dataTransaksi.user_id;
+  dataTransaksi.kode = idPembayaran + dataTransaksi.user_id + Math.floor(Math.random() * 999) + 100;
   await createTransaksi(dataTransaksi)
     .then((response) => {
       pay(response.data.token);

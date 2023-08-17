@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import routes from "./routes";
 
 const user = JSON.parse(localStorage.getItem("datauser"));
@@ -17,7 +17,6 @@ router.beforeEach(async (to, from) => {
     // redirect the user to the login page
     return { name: "home" };
   }
- 
 });
 
 export default router;

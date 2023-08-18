@@ -1,19 +1,50 @@
 <script setup>
 import { computed, ref, onMounted, reactive } from "vue";
 import { allPembayaran, deletePembayaran } from "../../http/pembayaran";
-import { createTransaksi } from "../../http/transaksi";
+import { allTransaksi, createTransaksi, Transaksi } from "../../http/transaksi";
 import Navbar from "../../components/Navbar.vue";
 // import ModalMapel from "../components/mapel/modalMapel.vue";
 
 const pembayaran = ref([]);
+const transaksi = ref([]);
+const search = ref("");
+const btnBayar = ref(false);
 
 const user = JSON.parse(localStorage.getItem("datauser"));
 
 function dataPembayaran() {
   allPembayaran().then((result) => {
     pembayaran.value = result.data.data;
+    // console.log(result.data);
+  });
+}
+function getTransaksi() {
+  allTransaksi().then((result) => {
+    transaksi.value = result.data.data;
+    console.log("Transaksi");
     console.log(result.data);
   });
+}
+
+const isPembayaran = computed(() =>
+  pembayaran.value.filter((pembayaran) => {
+    return search.value == "" ? pembayaran : pembayaran.bulan.toLowerCase().match(search.value.toLowerCase());
+  })
+);
+
+function cekTransaksi(id) {
+  console.log("btn");
+  console.log(id);
+  const cek = computed(() =>
+    transaksi.value.filter((t) => {
+      return (t.pembayaran.id == id) !== null ? t.pembayaran.id == id : "";
+    })
+  );
+  if (cek.value.length > 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function destroy(id, index) {
@@ -45,6 +76,8 @@ const dataTransaksi = reactive({
 
 const create = async (id) => {
   // alert(JSON.stringify(dataTransaksi));
+  const cek = cekTransaksi(id);
+
   dataTransaksi.pembayaran_id = id;
 
   await createTransaksi(dataTransaksi)
@@ -93,6 +126,8 @@ function pay(token) {
 
 onMounted(async () => {
   dataPembayaran();
+  getTransaksi();
+
   // destroy;
 });
 </script>
@@ -103,47 +138,48 @@ onMounted(async () => {
     <div class="card p-3">
       <!-- Button trigger modal -->
       <h1>Data Pembayaran</h1>
-      <div v-if="user.role !== 3" class="row m-4">
-        <div class="col-lg-5">
-          <router-link :to="{ name: 'create.pembayaran' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+      <div class="row m-4">
+        <div v-if="user.role !== 3" class="col-lg-7 d-flex justify-content-start">
+          <router-link :to="{ name: 'create.pembayaran' }" class="btn btn-outline-primary btn-sm rounded shadow mb-3"> Tambah Pembayaran </router-link>
+        </div>
+        <div :class="user.role == 3 ? 'col-lg-12 d-flex justify-content-end' : 'col-lg-5 d-flex justify-content-end'">
+          <div class="form-group">
+            <input class="form-control text-right" type="text" v-model="search" placeholder="Cari Bulan" />
+          </div>
         </div>
       </div>
 
-      <table class="table table-hover p-5">
-        <!-- <DataTable :data="isGuru" class="display"> -->
-        <div class="table">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>pembayaran</th>
-                <th>Bulan</th>
-                <th>total</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(pembayaran, index) in pembayaran" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ pembayaran.pembayaran }}</td>
-                <td>{{ pembayaran.bulan }}</td>
-                <td>{{ pembayaran.total }}</td>
-                <td>
-                  <div v-if="user.role !== 3" class="btn-group">
-                    <router-link :to="{ name: 'transaksi', params: { id: pembayaran.id } }" class="btn btn-sm btn-outline-info">Buka</router-link>
-                    <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(pembayaran.id, index)">Delete</button>
-                  </div>
-                  <div v-else class="btn-group">
-                    <input type="text" disabled hidden v-model="pembayaran.id" />
-                    <button @click="create(pembayaran.id)" class="btn btn-sm btn-outline-info">Bayar</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- </DataTable> -->
-      </table>
+      <div class="table table-hover">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>pembayaran</th>
+              <th>Bulan</th>
+              <th>total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(pembayaran, index) in isPembayaran" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ pembayaran.pembayaran }}</td>
+              <td>{{ pembayaran.bulan }}</td>
+              <td>{{ pembayaran.total }}</td>
+              <td>
+                <div v-if="user.role !== 3" class="btn-group">
+                  <router-link :to="{ name: 'transaksi', params: { id: pembayaran.id } }" class="btn btn-sm btn-outline-info">Buka</router-link>
+                  <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(pembayaran.id, index)">Hapus</button>
+                </div>
+                <div v-else class="btn-group">
+                  <input type="text" disabled hidden v-model="pembayaran.id" />
+                  <button :disabled="!cekTransaksi(pembayaran.id)" @click="create(pembayaran.id)" class="btn btn-sm btn-outline-info">{{ cekTransaksi(pembayaran.id) == true ? "Bayar" : "Sudah dibayar" }}</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

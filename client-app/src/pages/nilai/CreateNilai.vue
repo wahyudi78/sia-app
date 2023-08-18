@@ -28,8 +28,14 @@ const siswa = ref([]);
 
 const isSiswa = computed(() =>
   siswa.value.filter((siswa) => {
-    const role = user.role != 1 ? user.role : 3;
-    return siswa.role == role;
+    // const role = user.role != 1 ? user.role : 3;
+    return siswa.role == 3;
+  })
+);
+const isJadwal = computed(() =>
+  jadwal.value.filter((jadwal) => {
+    // const role = user.role != 1 ? user.role : 3;
+    return jadwal.guru.id == user.id;
   })
 );
 
@@ -85,7 +91,7 @@ onMounted(async () => {
 
       <div class="form-group">
         <label for="hari">Pilih Jadwal</label>
-        <model-list-select :list="jadwal" v-model="data.jadwal_id" option-value="id" placeholder="select item" :custom-text="getMapel" @select="jadwalSelect"> </model-list-select>
+        <model-list-select :list="isJadwal" v-model="data.jadwal_id" option-value="id" placeholder="select item" :custom-text="getMapel" @select="jadwalSelect"> </model-list-select>
         <span class="text-danger text-center">{{ validation.bulan }}</span>
       </div>
 

@@ -4,6 +4,14 @@ import { allRuangan, deleteRuangan } from "../../http/ruangan";
 import Navbar from "../../components/Navbar.vue";
 
 const ruangan = ref([]);
+const search = ref("");
+
+const isKelas = computed(() =>
+  ruangan.value.filter((ruangan) => {
+    return search.value == "" ? ruangan : ruangan.kelas.toLowerCase().match(search.value.toLowerCase());
+  })
+);
+
 function destroy(id, index) {
   const answer = window.confirm("Apakah anda yakin ingin menghapus data?");
   if (answer) {
@@ -38,8 +46,13 @@ onMounted(async () => {
     <div class="card p-3">
       <h1>Data Ruangan</h1>
       <div class="row m-4">
-        <div class="col-lg-5">
+        <div class="col-lg-7">
           <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tamabh Ruangan </router-link>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-end">
+          <div class="form-group">
+            <input class="form-control text-right" type="text" v-model="search" placeholder="Cari Kelas" />
+          </div>
         </div>
       </div>
       <table class="table table-striped p-5">
@@ -54,7 +67,7 @@ onMounted(async () => {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(ruangan, index) in ruangan" :key="index">
+              <tr v-for="(ruangan, index) in isKelas" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ ruangan.kelas }}</td>
                 <td>

@@ -5,10 +5,11 @@ import { allGuru, deleteGuru } from "../../http/guru";
 import Navbar from "../../components/Navbar.vue";
 
 const guru = ref([]);
+const search = ref("");
+
 const isGuru = computed(() =>
   guru.value.filter((guru) => {
-    return guru.role == 2;
-    
+    return search.value == "" ? guru.role == 2 : guru.name.toLowerCase().match(search.value.toLowerCase());
   })
 );
 
@@ -58,42 +59,46 @@ onBeforeMount(async () => {
     <div class="card p-3">
       <h1>Data Guru</h1>
       <div class="row m-4">
-        <div class="col-lg-5">
+        <div class="col-lg-7">
           <router-link :to="{ name: 'create.guru' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
         </div>
-      </div>
-      <table class="table table-striped p-5">
-        <!-- <DataTable :data="isGuru" class="display"> -->
-        <div class="table table-hover">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>NIP</th>
-                <th>NAMA</th>
-                <th>AGAMA</th>
-                <th>ALAMAT</th>
-                <th>action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(isGuru, index) in isGuru" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ isGuru.name }}</td>
-                <td>{{ isGuru.agama }}</td>
-                <td>{{ isGuru.alamat }}</td>
-                <td>
-                  <div class="btn-group">
-                    <router-link :to="{ name: 'update.guru', params: { id: isGuru.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
-
-                    <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(isGuru.id, index)">Delete</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-lg-5 d-flex justify-content-end">
+          <div class="form-group">
+            <input class="form-control text-right" type="text" v-model="search" placeholder="Cari Nama" />
+          </div>
         </div>
-        <!-- </DataTable> -->
-      </table>
+      </div>
+      <!-- <DataTable :data="isGuru" class="display"> -->
+      <div class="table table-hover">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>NIP</th>
+              <th>NAMA</th>
+              <th>AGAMA</th>
+              <th>ALAMAT</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(isGuru, index) in isGuru" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ isGuru.nomor_induk }}</td>
+              <td>{{ isGuru.name }}</td>
+              <td>{{ isGuru.agama }}</td>
+              <td>{{ isGuru.alamat }}</td>
+              <td>
+                <div class="btn-group">
+                  <router-link :to="{ name: 'update.guru', params: { id: isGuru.id } }" class="btn btn-sm btn-outline-info">Update</router-link>
+
+                  <button class="btn btn-sm btn-outline-warning" @click.prevent="destroy(isGuru.id, index)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

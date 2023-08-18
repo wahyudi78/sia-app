@@ -5,8 +5,15 @@ import Navbar from "../../components/Navbar.vue";
 // import ModalMapel from "../components/mapel/modalMapel.vue";
 
 const mapel = ref([]);
+const search = ref("");
 
 const user = JSON.parse(localStorage.getItem("datauser"));
+
+const isMapel = computed(() =>
+  mapel.value.filter((mapel) => {
+    return search.value == "" ? mapel : mapel.mapel.toLowerCase().match(search.value.toLowerCase());
+  })
+);
 
 function destroy(id, index) {
   const answer = window.confirm("Apakah anda yakin, ingin menghapus data?");
@@ -41,8 +48,13 @@ onMounted(async () => {
       <!-- Button trigger modal -->
       <h1>Data Mata Pelajaran</h1>
       <div v-if="user.role == 1" class="row m-4">
-        <div class="col-lg-5">
+        <div class="col-lg-7">
           <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Mata Pelajaran </router-link>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-end">
+          <div class="form-group">
+            <input class="form-control text-right" type="text" v-model="search" placeholder="Cari Mapel" />
+          </div>
         </div>
       </div>
 
@@ -58,7 +70,7 @@ onMounted(async () => {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(mapel, index) in mapel" :key="index">
+              <tr v-for="(mapel, index) in isMapel" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ mapel.mapel }}</td>
                 <td>{{ mapel.kelas }}</td>

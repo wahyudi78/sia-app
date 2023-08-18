@@ -49,8 +49,8 @@ function destroy(id, index) {
   <div class="conatiner m-3">
     <div class="card p-3">
       <div class="row">
-        <div v-if="user.role !== 3" class="col-lg-5">
-          <router-link :to="{ name: 'create.nilai' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Nilai </router-link>
+        <div v-if="user.role !== 3" class="col-lg-7">
+          <router-link :to="{ name: 'create.nilai' }" class="btn btn-outline-primary btn-md rounded shadow mb-3"> Tambah Nilai </router-link>
         </div>
         <div :class="user.role == 3 ? 'col-lg-12 d-flex justify-content-end' : 'col-lg-5 d-flex justify-content-end'">
           <div class="form-group">
@@ -70,7 +70,7 @@ function destroy(id, index) {
               <th>RUANGAN</th>
               <th>Nilai</th>
               <th>WAKTU</th>
-              <th v-if="user.role == 1 || user.role == 2">ACTION</th>
+              <th v-if="user.role !== 3">ACTION</th>
             </tr>
           </thead>
 
@@ -79,11 +79,11 @@ function destroy(id, index) {
               <td>{{ index + 1 }}</td>
               <td>{{ isNilai.siswa.nomor_induk }}</td>
               <td>{{ isNilai.siswa.name }}</td>
-              <td>{{ isNilai.jadwal.mapel.mapel }}</td>
-              <td>{{ isNilai.jadwal.ruangan.kelas }}</td>
+              <td>{{ isNilai.jadwal.mapel ? isNilai.jadwal.mapel.mapel : "" }}</td>
+              <td>{{ isNilai.jadwal.ruangan ? isNilai.jadwal.ruangan.kelas : "" }}</td>
               <td :class="isNilai.nilai < 75 ? 'text-danger' : isNilai.nilai > 80 ? 'text-success' : 'text-primary'">{{ isNilai.nilai }}</td>
               <td>{{ isNilai.waktu }}</td>
-              <td v-if="user.role == 1 || user.role == 2">
+              <td v-if="user.role !== 3">
                 <div class="btn-group">
                   <router-link :to="{ name: 'update.nilai', params: { id: isNilai.id } }" class="btn btn-sm btn-outline-info">ubah</router-link>
 

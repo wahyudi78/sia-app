@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 import SidebarVue from "./components/Sidebar.vue";
+import $ from "jquery";
 const location = useRoute();
 </script>
 

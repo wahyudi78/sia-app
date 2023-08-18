@@ -19,6 +19,7 @@ const validation = reactive({
 function login() {
   api
     .post("http://localhost:8000/api/auth/login", data)
+    // .post("https://dev-code.my.id/webservice/public/api/auth/login", data)
     .then((response) => {
       // simpan data user dan token di storage
       localStorage.setItem("token", JSON.stringify(response.data.token));

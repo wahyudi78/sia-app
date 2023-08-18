@@ -81,9 +81,9 @@ onMounted(async () => {
             <tr v-for="(jadwal, index) in isJadwal" :key="index">
               <td>{{ index + 1 }}</td>
               <td>{{ jadwal.hari }}</td>
-              <td>{{ jadwal.guru.name }}</td>
-              <td>{{ jadwal.mapel.mapel }}</td>
-              <td>{{ jadwal.ruangan.kelas }}</td>
+              <td>{{ jadwal.guru ? jadwal.guru.name : "" }}</td>
+              <td>{{ jadwal.mapel ? jadwal.mapel.mapel : "" }}</td>
+              <td>{{ jadwal.ruangan ? jadwal.ruangan.kelas : "" }}</td>
               <td>{{ jadwal.mulai }}</td>
               <td>{{ jadwal.selesai }}</td>
               <td v-if="user.role !== 3">
@@ -101,9 +101,9 @@ onMounted(async () => {
             <tr v-for="(isGuru, index) in isGuru" :key="index">
               <td>{{ index + 1 }}</td>
               <td>{{ isGuru.hari }}</td>
-              <td>{{ isGuru.guru.name }}</td>
-              <td>{{ isGuru.mapel.mapel }}</td>
-              <td>{{ isGuru.ruangan.kelas }}</td>
+              <td>{{ isGuru.guru ? isGuru.guru.name : "" }}</td>
+              <td>{{ isGuru.mapel.mapel ? isGuru.mapel.mapel : "" }}</td>
+              <td>{{ isGuru.ruangan ? isGuru.ruangan.kelas : " " }}</td>
               <td>{{ isGuru.mulai }}</td>
               <td>{{ isGuru.selesai }}</td>
               <td v-if="user.role !== 3">

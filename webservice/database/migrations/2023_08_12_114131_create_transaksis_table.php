@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
-            $table->foreignId('pembayaran_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('pembayaran_id')->nullable()->constrained()->nullOnDelete()->after('id');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->after('id');
             $table->datetime('waktu');
             $table->integer('status');
             $table->timestamps();

@@ -1,10 +1,12 @@
 <script setup>
 import { computed, reactive, ref, onMounted } from "vue";
 import { createGuru } from "../../http/guru";
-import { useRouter } from "vue-router";
-import bcrypt from "bcryptjs";
+import { allRuangan } from "../../http/ruangan";
 
-const salt = bcrypt.genSaltSync(10);
+import { useRouter } from "vue-router";
+import { ModelListSelect } from "vue-search-select";
+
+const ruangan = ref([]);
 
 // const pass = ref(data.username);
 
@@ -29,6 +31,12 @@ const validation = reactive({
   username: "",
 });
 const router = useRouter();
+
+function optionRuangan() {
+  allRuangan().then((result) => {
+    ruangan.value = result.data.data;
+  });
+}
 
 const create = async () => {
   data.password = data.username;
@@ -58,6 +66,10 @@ const create = async () => {
     });
   console.log(validation);
 };
+
+onMounted(async () => {
+  optionRuangan();
+});
 </script>
 
 <template>
@@ -81,27 +93,23 @@ const create = async () => {
       </div>
       <div class="form-group">
         <label for="agama">Agama</label>
-        <input v-model="data.agama" type="text" class="form-control" id="agama" placeholder="Masukan Nama nomor induk" />
+        <input v-model="data.agama" type="text" class="form-control" id="agama" placeholder="Masukan Agama" />
         <span class="text-danger text-center">{{ validation.agama }}</span>
       </div>
       <div class="form-group">
         <label for="alamat">Alamat</label>
-        <input v-model="data.alamat" type="text" class="form-control" id="alamat" placeholder="Masukan Nama nomor induk" />
+        <input v-model="data.alamat" type="text" class="form-control" id="alamat" placeholder="Masukan Alamat" />
         <span class="text-danger text-center">{{ validation.alamat }}</span>
       </div>
       <div class="form-group">
         <label for="alamusernameat">username</label>
-        <input v-model="data.username" type="text" class="form-control" id="username" placeholder="Masukan Nama nomor induk" />
+        <input v-model="data.username" type="text" class="form-control" id="username" placeholder="Masukan username" />
         <span class="text-danger text-center">{{ validation.username }}</span>
       </div>
       <div class="form-group">
-        <label for="kelas">Kelas</label>
-        <select v-model="data.kelas" class="form-control" id="kelas">
-          <option value="1">KELAS I</option>
-          <option value="2">KELAS II</option>
-          <option value="3">KELAS III</option>
-        </select>
-        <span class="text-danger text-center">{{ validation.kelas }}</span>
+        <label for="ruangan">Ruangan</label>
+        <model-list-select :list="ruangan" v-model="data.ruangan_id" option-value="id" option-text="kelas" placeholder="select item"> </model-list-select>
+        <span class="text-danger text-center">{{ validation.ruangan_id }}</span>
       </div>
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>

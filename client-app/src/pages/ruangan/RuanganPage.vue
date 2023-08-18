@@ -47,7 +47,7 @@ onMounted(async () => {
       <h1>Data Ruangan</h1>
       <div class="row m-4">
         <div class="col-lg-7">
-          <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tamabh Ruangan </router-link>
+          <router-link :to="{ name: 'create.ruangan' }" class="btn btn-outline-primary btn-md rounded shadow mb-3"> Tambah Ruangan </router-link>
         </div>
         <div class="col-lg-5 d-flex justify-content-end">
           <div class="form-group">

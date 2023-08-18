@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->foreignId('mapel_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->after('id');
+            $table->foreignId('mapel_id')->nullable()->constrained()->nullOnDelete()->after('id');
             $table->string('hari');
             $table->time('mulai');
             $table->time('selesai');
-            $table->foreignId('ruangan_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('ruangan_id')->nullable()->constrained()->nullOnDelete()->after('id');
             $table->timestamps();
         });
     }

@@ -75,11 +75,11 @@ function destroy(id, index) {
               <td>{{ index + 1 }}</td>
               <td>{{ isAbsensi.guru.nomor_induk }}</td>
               <td>{{ isAbsensi.guru.name }}</td>
-              <td>{{ isAbsensi.jadwal.mapel.mapel }}</td>
+              <td>{{ isAbsensi.jadwal.mapel ? isAbsensi.jadwal.mapel.mapel : "" }}</td>
               <td>{{ isAbsensi.jadwal.hari }}</td>
               <td>{{ isAbsensi.jadwal.mulai }} WIB</td>
               <td>{{ isAbsensi.jadwal.selesai }} WIB</td>
-              <td>{{ isAbsensi.jadwal.ruangan.kelas }}</td>
+              <td>{{ isAbsensi.jadwal.ruangan ? isAbsensi.jadwal.ruangan.kelas : "" }}</td>
               <td :class="isAbsensi.keterangan == 1 ? 'text-success' : isAbsensi.keterangan == 2 ? 'text-danger' : 'text-warning'">{{ isAbsensi.keterangan == 1 ? "MASUK" : isAbsensi.keterangan == 2 ? "TIDAK MASUK" : "SAKIT" }}</td>
 
               <td v-if="user.role == 1 || user.role == 2">

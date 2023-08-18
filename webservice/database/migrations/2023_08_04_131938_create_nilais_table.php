@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
             $table->integer('nilai');
-            $table->foreignId('jadwal_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('jadwal_id')->nullable()->constrained()->nullOnDelete()->after('id');
             $table->date('waktu');
             $table->timestamps();
         });

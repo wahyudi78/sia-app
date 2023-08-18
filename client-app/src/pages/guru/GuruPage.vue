@@ -60,7 +60,7 @@ onBeforeMount(async () => {
       <h1>Data Guru</h1>
       <div class="row m-4">
         <div class="col-lg-7">
-          <router-link :to="{ name: 'create.guru' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Add </router-link>
+          <router-link :to="{ name: 'create.guru' }" class="btn btn-outline-primary btn-md rounded shadow mb-3"> Tambah Guru </router-link>
         </div>
         <div class="col-lg-5 d-flex justify-content-end">
           <div class="form-group">

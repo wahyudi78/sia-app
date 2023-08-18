@@ -49,7 +49,7 @@ onMounted(async () => {
       <h1>Data Mata Pelajaran</h1>
       <div v-if="user.role == 1" class="row m-4">
         <div class="col-lg-7">
-          <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-lg rounded shadow mb-3"> Tambah Mata Pelajaran </router-link>
+          <router-link :to="{ name: 'create.mapel' }" class="btn btn-outline-primary btn-md rounded shadow mb-3"> Tambah Mata Pelajaran </router-link>
         </div>
         <div class="col-lg-5 d-flex justify-content-end">
           <div class="form-group">
@@ -66,14 +66,13 @@ onMounted(async () => {
               <tr>
                 <th>No</th>
                 <th>MAPEL</th>
-                <th>KELAS</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(mapel, index) in isMapel" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ mapel.mapel }}</td>
-                <td>{{ mapel.kelas }}</td>
                 <td>
                   <div class="btn-group">
                     <router-link :to="{ name: 'update.mapel', params: { id: mapel.id } }" class="btn btn-sm btn-outline-info">Edit</router-link>

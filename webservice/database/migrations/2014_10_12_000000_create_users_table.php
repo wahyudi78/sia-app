@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('username')->unique();
             $table->string('password');
-           
-            $table->integer('role');
+            $table->foreignId('ruangan_id')->nullable()->constrained()->nullOnDelete()->after('id');$table->integer('role');
             $table->rememberToken();
             $table->timestamps();
         });

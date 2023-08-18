@@ -20,7 +20,6 @@ class LoginController extends Controller
     public function __invoke(LoginRequest $request)
     {
         $user = User::where('username', $request->username)->first();
-
         if(!$user || !Hash::check($request->password, $user->password)){
             throw ValidationException::withMessages([
                 'username' => 'username incorect'

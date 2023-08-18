@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('pembayaran');
             $table->string('bulan');
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->after('id');
             $table->integer('order_id');
             $table->bigInteger('total');
             $table->integer('status');

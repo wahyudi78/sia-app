@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('absensis', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
-            $table->foreignId('jadwal_id')->nullable()->constrained()->cascadeOnDelete()->after('id');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->after('id');
+            $table->foreignId('jadwal_id')->nullable()->constrained()->nullOnDelete()->after('id');
             
         });
     }
